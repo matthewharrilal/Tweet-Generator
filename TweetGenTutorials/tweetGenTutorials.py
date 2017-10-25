@@ -42,8 +42,14 @@ def anagram_generator(split_file):
     random_word = split_file[random_index]
     # return len(random_word)
     for word in split_file:
-       if len(word) == len(random_word):
-          print(word)
+        formatted_length_words = len(random_word)
+        if len(word) == formatted_length_words:
+            for letter in word:
+                print("The word we are basing the anagrams off of %s"%(word))
+                if letter in random_word:
+                    return ("The anagram of the %s is %s" % (word,random_word))
+
+
 
 def autocomplete_word(split_file):
     random_index = random.randint(0, len(split_file) - 1)
@@ -56,7 +62,10 @@ def autocomplete_word(split_file):
     return ''
 
 if __name__ == '__main__':
-    quote = autocomplete_word(split_file)
-    print(quote)
+    # quote = autocomplete_word(split_file)
+    # print(quote)
+    word = anagram_generator(split_file)
+    print(word)
+
 
     # print(split_file)
