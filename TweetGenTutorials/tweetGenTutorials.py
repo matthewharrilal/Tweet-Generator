@@ -43,7 +43,7 @@ def anagram_generator(split_file):
     # return len(random_word)
     for word in split_file:
        if len(word) == len(random_word):
-          print(list(word))
+          print(word)
 
 if __name__ == '__main__':
     quote = anagram_generator(split_file)
