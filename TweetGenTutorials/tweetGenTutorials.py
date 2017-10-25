@@ -45,7 +45,18 @@ def anagram_generator(split_file):
        if len(word) == len(random_word):
           print(word)
 
+def autocomplete_word(split_file):
+    random_index = random.randint(0, len(split_file) - 1)
+    random_word = split_file[random_index]
+    abbreviated_word = random_word[:3]
+    print("The abbreviated word is %s" %(abbreviated_word))
+    for word in split_file:
+        if abbreviated_word == word[:3]:
+            print(word)
+    return ''
+
 if __name__ == '__main__':
-    quote = anagram_generator(split_file)
+    quote = autocomplete_word(split_file)
     print(quote)
+
     # print(split_file)
