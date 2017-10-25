@@ -29,13 +29,6 @@ word_file = open("/usr/share/dict/words")
 read_file = word_file.read()
 split_file = read_file.split()
 
-# def anagram_generator(split_file):
-#     random_index = random.randint(0, len(split_file) - 1)
-#     random_word = split_file[random_index]
-#     listed_word = list(random_word)
-#     shuffled_word = random.shuffle(listed_word)
-#     new_word = ''.join(listed_word)
-#     return(random_word,new_word)
 
 def anagram_generator(split_file):
     random_index = random.randint(0, len(split_file) - 1)
@@ -45,9 +38,10 @@ def anagram_generator(split_file):
         formatted_length_words = len(random_word)
         if len(word) == formatted_length_words:
             for letter in word:
+                print(letter)
                 print("The word we are basing the anagrams off of %s"%(word))
                 if letter in random_word:
-                    return ("The anagram of the %s is %s" % (word,random_word))
+                    return ("The anagram of the word %s is %s" % (word,random_word))
 
 
 
