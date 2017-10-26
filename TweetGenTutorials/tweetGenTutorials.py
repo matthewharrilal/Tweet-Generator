@@ -31,21 +31,19 @@ read_file = word_file.read()
 split_file = read_file.split()
 
 
+def permutations_method(word):
+    perms = [''.join(p) for p in permutations(word)]
+    return perms
+
 def anagram_generator(split_file):
     random_index = random.randint(0, len(split_file) - 1)
     random_word = split_file[random_index]
     random_word_length = len(random_word)
     for words_in_split_file in split_file:
         if random_word_length == len(words_in_split_file):
-            shuffled_letters_in_word = random.shuffle(list(random_word))
-            if shuffled_letters_in_word == words_in_split_file:
-                print(shuffled_letters_in_word     )
-                print(words_in_split_file)
-            else:
-                return("The generated words had no anagrams in the word file")
-
-
-
+           for combination in permutations_method(random_word):
+               if any(combination) == words_in_split_file:
+                   print(combination)
 
 
 def autocomplete_word(split_file):
@@ -58,10 +56,8 @@ def autocomplete_word(split_file):
             print(word)
     return ''
 
-def permutations_method(word):
-    perms = [''.join(p) for p in permutations(word)]
-    return perms
+
 
 
 if __name__ == '__main__':
-    print(anagram_generator(split_file))
+   print(permutations_method("google"))
