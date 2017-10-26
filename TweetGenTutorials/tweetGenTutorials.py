@@ -1,4 +1,5 @@
 import random
+from itertools import permutations
 
 quotes = ("It's just a flesh wound.",
           "He's not the Messiah. He's a very naughty boy!",
@@ -38,7 +39,7 @@ def anagram_generator(split_file):
         if random_word_length == len(words_in_split_file):
             shuffled_letters_in_word = random.shuffle(list(random_word))
             if shuffled_letters_in_word == words_in_split_file:
-                print(shuffled_letters_in_word)
+                print(shuffled_letters_in_word     )
                 print(words_in_split_file)
             else:
                 return("The generated words had no anagrams in the word file")
@@ -57,11 +58,10 @@ def autocomplete_word(split_file):
             print(word)
     return ''
 
+def permutations_method(word):
+    perms = [''.join(p) for p in permutations(word)]
+    return perms
+
+
 if __name__ == '__main__':
-    # quote = autocomplete_word(split_file)
-    # print(quote)
-    word = anagram_generator(split_file)
-    print(word)
-
-
-    # print(split_file)
+    print(anagram_generator(split_file))
