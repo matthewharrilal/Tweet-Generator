@@ -39,13 +39,20 @@ def anagram_generator(split_file):
     random_index = random.randint(0, len(split_file) - 1)
     random_word = split_file[random_index]
     random_word_length = len(random_word)
-    for words_in_split_file in split_file:
-        if random_word_length == len(words_in_split_file):
-           for combination in permutations_method(random_word):
-               if any(combination) == words_in_split_file:
-                   print(combination)
+    same_length_words = list(filter(lambda x: len(x) == random_word_length, split_file))
+    # for word in permutations_method(random_word):
+    #     print(word)
+    combos = permutations_method(random_word)
+    for word in combos:
+        if word in same_length_words:
+            print(random_word)
+            print(''.join(set(word)))
 
-
+def see_if_word_accurate(word):
+    if word in split_file:
+        print('the word is in the file')
+    else:
+        print("the word is not in the split file")
 def autocomplete_word(split_file):
     random_index = random.randint(0, len(split_file) - 1)
     random_word = split_file[random_index]
@@ -60,4 +67,7 @@ def autocomplete_word(split_file):
 
 
 if __name__ == '__main__':
-   print(permutations_method("google"))
+     # print(anagram_generator(split_file))
+    # print(permutations_method("Matthew"))
+    # print(split_file)
+     see_if_word_accurate('cisuvtel')
