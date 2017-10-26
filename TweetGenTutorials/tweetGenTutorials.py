@@ -33,15 +33,17 @@ split_file = read_file.split()
 def anagram_generator(split_file):
     random_index = random.randint(0, len(split_file) - 1)
     random_word = split_file[random_index]
-    # return len(random_word)
-    for word in split_file:
-        formatted_length_words = len(random_word)
-        if len(word) == formatted_length_words:
-            for letter in word:
-                print(letter)
-                print("The word we are basing the anagrams off of %s"%(word))
-                if letter in random_word:
-                    return ("The anagram of the word %s is %s" % (word,random_word))
+    random_word_length = len(random_word)
+    for words_in_split_file in split_file:
+        if random_word_length == len(words_in_split_file):
+            shuffled_letters_in_word = random.shuffle(list(random_word))
+            if shuffled_letters_in_word == words_in_split_file:
+                print(shuffled_letters_in_word)
+                print(words_in_split_file)
+            else:
+                return("The generated words had no anagrams in the word file")
+
+
 
 
 
