@@ -13,7 +13,7 @@ def random_python_quote():
 
 
 def randomize_given_words(text):
-    split_text = list(text.split(" "))
+    split_text = text.split(" ")
     print(split_text)
     rand_index = random.randint(0, len(split_text) - 1)
     return split_text[rand_index]
@@ -46,7 +46,8 @@ def anagram_generator(split_file):
     for word in combos:
         if word in same_length_words:
             print(random_word)
-            print(''.join(set(word)))
+            return(''.join(set(word)))
+    return ''
 
 def see_if_word_accurate(word):
     if word in split_file:
@@ -70,4 +71,5 @@ if __name__ == '__main__':
      # print(anagram_generator(split_file))
     # print(permutations_method("Matthew"))
     # print(split_file)
-     see_if_word_accurate('cisuvtel')
+    #  see_if_word_accurate('cisuvtel')
+    print(anagram_generator(split_file))
