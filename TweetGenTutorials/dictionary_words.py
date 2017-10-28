@@ -1,4 +1,5 @@
 import random
+import time
 
 with open("/usr/share/dict/words") as word_file:
     read_file = word_file.read()
@@ -35,4 +36,8 @@ def generate_flash_card(word_dictionary):
         print("The accurate definition of the word is %s" %(word_dictionary[random_key]))
     return ''
 
-print(random_sentence(split_file))
+if __name__ == '__main__':
+    start_time = time.time()
+    print(random_sentence(split_file))
+    end_time = time.time()
+    print(end_time - start_time)
