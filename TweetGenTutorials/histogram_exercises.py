@@ -17,7 +17,8 @@ def list_of_lists_frequency():
     for list in list_of_lists:
         for _ in list:
             list_frequency.append(list_of_lists.count(list))
-    print(list_frequency)
+    return(list_frequency)
 
 
-list_of_lists_frequency()
+
+print(list_of_lists_frequency())
