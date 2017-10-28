@@ -9,5 +9,15 @@ def dictionary_word_frequency():
     return number_frequency
     # return list(zip(word_dictionary.keys(), word_dictionary.values()))
 
-print(dictionary_word_frequency())
+def list_of_lists_frequency():
+    list_of_lists = [[7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9]]
 
+    list_frequency = []
+
+    for list in list_of_lists:
+        for _ in list:
+            list_frequency.append(list_of_lists.count(list))
+    print(list_frequency)
+
+
+list_of_lists_frequency()
