@@ -1,24 +1,21 @@
-def dictionary_word_frequency():
-    number_dictionary = {1: 27, 34: 1, 3: 72, 4: 62, 5: 33, 6: 36, 7: 20, 8: 12, 9: 9, 10: 6, 11: 5, 12: 8, 2: 74, 14: 4, 15: 3, 16: 1, 17: 1, 18: 1, 19: 1, 21: 1, 27: 2}
+import random
+from functools import reduce
 
-    number_frequency = []
+word_file = open("/usr/share/dict/words")
+read_file = word_file.read()
+split_file = read_file.split()
+word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Justin", "Justin", "Steven"]
 
-    for number in number_dictionary.values():
-        number_frequency.append(list(number_dictionary.values()).count(number))
-    print(list(zip(number_dictionary.keys(), number_dictionary.values())))
-    return number_frequency
-    # return list(zip(word_dictionary.keys(), word_dictionary.values()))
-
-def list_of_lists_frequency():
-    list_of_lists = [[7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9], [7, 8, 9]]
-
-    list_frequency = []
-
-    for list in list_of_lists:
-        for _ in list:
-            list_frequency.append(list_of_lists.count(list))
-    return(list_frequency)
+def find_frequency_of_words(split_file):
+   word_frequency = {}
+   # So essentially we want a key value pair where the key represents the unique wor
+   for word in split_file:
+       occurences = split_file.count(word)
+       word_frequency[word] = occurences
+       # if occurences == 1:
+       #     word_frequency[word] = occurences
+   return word_frequency
 
 
 
-print(list_of_lists_frequency())
+print(find_frequency_of_words(word_list))
