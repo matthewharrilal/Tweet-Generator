@@ -18,5 +18,11 @@ def find_frequency_of_words(users_input, word_list):
    return word_frequency
 
 
+def find_unique_words(word_list):
+    for word in word_list:
+        occurences = word_list.count(word)
+    print("Hey this is Matthew")
+    return occurences
 
-print(find_frequency_of_words(users_input, word_list))
+# print(find_unique_words(word_list))
+print("Hey this is Matthew")
