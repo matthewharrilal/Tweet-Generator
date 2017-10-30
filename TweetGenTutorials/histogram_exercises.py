@@ -4,9 +4,9 @@ from functools import reduce
 word_file = open("/usr/share/dict/words")
 read_file = word_file.read()
 split_file = read_file.split()
-word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Justin", "Justin", "Steven"]
+word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Justin", "Justin", "Steven", "Rohan", "Willie"]
 
-users_input = str(input())
+# users_input = str(input())
 # users_input = "Corey"
 def find_frequency_of_words(users_input, word_list):
    word_frequency = {}
@@ -19,10 +19,14 @@ def find_frequency_of_words(users_input, word_list):
 
 
 def find_unique_words(word_list):
+    unique_word = []
     for word in word_list:
         occurences = word_list.count(word)
-    print("Hey this is Matthew")
-    return occurences
+        if occurences == 1:
+            unique_word.append(word)
+    return len(unique_word)
 
-# print(find_unique_words(word_list))
-print("Hey this is Matthew")
+
+
+print(find_unique_words(word_list))
+
