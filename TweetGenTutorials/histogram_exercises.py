@@ -58,8 +58,12 @@ def generate_weights(word_list):
     return weight_dictionary
 
 
-def list_of_tuples_histogram(word_list):
-    list_of_lists = list((zip(histogram(word_list).keys(), histogram(word_list).values())))
-    return list_of_lists
+def list_of_tuples_histogram():
+    list_of_tuples = list((zip(histogram(word_list).keys(), histogram(word_list).values())))
+    return list_of_tuples
 
-print(list_of_tuples_histogram(word_list))
+def list_of_lists_histogram():
+    list_of_lists = []
+    list_of_lists.append(list(zip(histogram(word_list).keys(), histogram(word_list).values())))
+    return list_of_lists
+print(list_of_lists_histogram())
