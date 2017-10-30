@@ -4,7 +4,7 @@ from functools import reduce
 word_file = open("/usr/share/dict/words")
 read_file = word_file.read()
 split_file = read_file.split()
-word_list = ["Matthew", "Corey", "Harrilal", "Corey"]
+word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Corey"]
 
 # users_input = str(input())
 # users_input = "Corey"
@@ -47,16 +47,6 @@ def generate_random_histogram_word():
         random_word = user_input[random_index]
     return random_word
 
-# def generate_weights():
-#     weight_dictionary = {}
-#     histogram_word_list = histogram(word_list)
-#     for word in histogram_word_list:
-#         word_occurences = list(histogram_word_list).count(word)
-#         weighted_occurences = sum(histogram_word_list.values()) / word_occurences
-#         weight_dictionary[word] = weighted_occurences
-#     print(word_occurences)
-#     print(sum(histogram_word_list.values()) / word_occurences)
-#     return weight_dictionary
 
 def generate_weights(word_list):
     weight_dictionary = {}
@@ -68,4 +58,8 @@ def generate_weights(word_list):
     return weight_dictionary
 
 
-print(generate_weights(word_list))
+def list_of_tuples_histogram(word_list):
+    list_of_lists = list((zip(histogram(word_list).keys(), histogram(word_list).values())))
+    return list_of_lists
+
+print(list_of_tuples_histogram(word_list))
