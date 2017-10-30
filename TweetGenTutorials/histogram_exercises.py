@@ -4,7 +4,7 @@ from functools import reduce
 word_file = open("/usr/share/dict/words")
 read_file = word_file.read()
 split_file = read_file.split()
-word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Justin", "Justin", "Steven", "Rohan", "Willie", "Willie", "Elliot", "Tia"]
+word_list = ["Matthew", "Corey", "Harrilal", "Corey"]
 
 # users_input = str(input())
 # users_input = "Corey"
@@ -14,6 +14,7 @@ def find_frequency_of_words(users_input, word_list):
    if users_input in word_list:
        for _ in word_list:
            occurences = word_list.count(users_input)
+           print(occurences)
            word_frequency[users_input] = occurences
    return word_frequency
 
@@ -27,13 +28,14 @@ def find_unique_words(word_list):
     return "The unique words are %s" %(unique_word)
 
 
-
+word_frequency = {}
 def histogram(word_list):
 
 # So essentially what this function will do is that it will take the unique words as a key in a dictionary and as a value the freu
-   word_frequency = {}
+
    for word in word_list:
        occurences = word_list.count(word)
+       print(occurences)
        word_frequency[word] = occurences
    return word_frequency
 
@@ -45,4 +47,25 @@ def generate_random_histogram_word():
         random_word = user_input[random_index]
     return random_word
 
-print(generate_random_histogram_word())
+# def generate_weights():
+#     weight_dictionary = {}
+#     histogram_word_list = histogram(word_list)
+#     for word in histogram_word_list:
+#         word_occurences = list(histogram_word_list).count(word)
+#         weighted_occurences = sum(histogram_word_list.values()) / word_occurences
+#         weight_dictionary[word] = weighted_occurences
+#     print(word_occurences)
+#     print(sum(histogram_word_list.values()) / word_occurences)
+#     return weight_dictionary
+
+def generate_weights(word_list):
+    weight_dictionary = {}
+    sum_values = sum(histogram(word_list).values())
+    for word in word_list:
+        word_occurences = word_list.count(word)
+        weighted_occurences = word_occurences / sum_values
+        weight_dictionary[word] = weighted_occurences
+    return weight_dictionary
+
+
+print(generate_weights(word_list))
