@@ -4,7 +4,7 @@ from functools import reduce
 word_file = open("/usr/share/dict/words")
 read_file = word_file.read()
 split_file = read_file.split()
-word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Justin", "Justin", "Steven", "Rohan", "Willie", "Willie", "Elliot"]
+word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Justin", "Justin", "Steven", "Rohan", "Willie", "Willie", "Elliot", "Tia"]
 
 # users_input = str(input())
 # users_input = "Corey"
@@ -24,7 +24,7 @@ def find_unique_words(word_list):
         occurences = word_list.count(word)
         if occurences == 1:
             unique_word.append(word)
-    return len(unique_word)
+    return "The unique words are %s" %(unique_word)
 
 
 
@@ -38,4 +38,11 @@ def histogram(word_list):
    return word_frequency
 
 
-print(histogram(word_list))
+def generate_random_histogram_word():
+    user_input = str(input()).split()
+    for word in histogram(user_input):
+        random_index = random.randint(0 , len(user_input) - 1)
+        random_word = user_input[random_index]
+    return random_word
+
+print(generate_random_histogram_word())
