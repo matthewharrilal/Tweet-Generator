@@ -63,7 +63,11 @@ def list_of_tuples_histogram():
     return list_of_tuples
 
 def list_of_lists_histogram():
-    list_of_lists = []
-    list_of_lists.append(list(zip(histogram(word_list).keys(), histogram(word_list).values())))
-    return list_of_lists
+    base_list = []
+    for key, value in histogram(word_list).items():
+        structured_list = [key, value]
+        base_list.append(structured_list)
+    return base_list
+
+
 print(list_of_lists_histogram())
