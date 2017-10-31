@@ -89,7 +89,18 @@ def list_of_lists_histogram():
         base_list.append(structured_list)
     return base_list
 
-print(generate_histogram_weight_with_tuples(word_list))
-# print(generate_weights(word_list))
+def generate_histogram_weight_with_list_lists(word_list):
+    base_list = []
+    structured_list = []
+    sum_of_frequencies = (sum(histogram(word_list).values()))
+    for key,value in histogram(word_list).items():
+        word_occurence = word_list.count(key)
+        weighted_occurence = word_occurence / sum_of_frequencies
+        if key not in structured_list:
+            structured_list = [key, weighted_occurence]
+            base_list.append(structured_list)
+    return base_list
 
-# print(generate_weights(word_list))
+
+# print(generate_histogram_weight_with_tuples(word_list))
+print(generate_histogram_weight_with_list_lists(word_list))
