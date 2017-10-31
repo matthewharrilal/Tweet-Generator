@@ -75,8 +75,11 @@ def generate_histogram_weight_with_tuples(word_list):
         #Once we get the words we then have to find the count for the word
         word_occurence = word_list.count(word)
         weight_occurence = word_occurence / sum_of_frequencies
-        weight_tuple = weight_tuple + (word , weight_occurence)
-    return weight_tuple[:6]
+    #     weight_tuple = weight_tuple + (word , weight_occurence)
+        if word not in weight_tuple:
+            weight_tuple = weight_tuple + (word, weight_occurence)
+    return weight_tuple
+    # return weight_tuple
 
 def list_of_lists_histogram():
     #This function essentially displays the histogram as a list of lists rather than a dictionary
@@ -87,4 +90,6 @@ def list_of_lists_histogram():
     return base_list
 
 print(generate_histogram_weight_with_tuples(word_list))
+# print(generate_weights(word_list))
+
 # print(generate_weights(word_list))
