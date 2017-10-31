@@ -1,5 +1,4 @@
-import random
-from functools import reduce
+import creating_randomness
 
 word_file = open("/usr/share/dict/words")
 read_file = word_file.read()
@@ -40,11 +39,18 @@ def histogram(word_list):
    return word_frequency
 
 
+# def generate_random_histogram_word():
+#     user_input = str(input()).split()
+#     for word in histogram(user_input):
+#         random_index = random.randint(0 , len(user_input) - 1)
+#         random_word = user_input[random_index]
+#     return random_word
+
 def generate_random_histogram_word():
-    user_input = str(input()).split()
-    for word in histogram(user_input):
-        random_index = random.randint(0 , len(user_input) - 1)
-        random_word = user_input[random_index]
+    for word in word_list:
+        # random_word = creating_randomness.gen_random_range(word_list[0], [])
+        random_index = creating_randomness.gen_random_range(0, len(word_list) -1)
+        random_word = word_list[random_index]
     return random_word
 
 
@@ -53,7 +59,7 @@ def generate_weights(word_list):
     sum_values = sum(histogram(word_list).values())
     for word in word_list:
         word_occurences = word_list.count(word)
-        weighted_occurences = word_occurences / sum_values
+        weighted_occurences = word_occurences
         weight_dictionary[word] = weighted_occurences
     return weight_dictionary
 
@@ -70,4 +76,6 @@ def list_of_lists_histogram():
     return base_list
 
 
-print(list_of_lists_histogram())
+
+
+print(generate_random_histogram_word())
