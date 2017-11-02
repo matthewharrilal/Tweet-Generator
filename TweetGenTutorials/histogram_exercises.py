@@ -114,18 +114,17 @@ def generate_random_histogram_word():
 #     return int(time_random() * (max + min) - min)
 
 
-def generate_random_relative_word(word_list):
-    base_dictionary = {}
-    relative_probability = generate_weights(word_list)
-    # percent_probability = relative_probability * 100
-    for key, value in relative_probability.items():
-        percent_probability = value * 100
-        if value not in base_dictionary:
-            # base_list.append(percent_probability)
-            base_dictionary[key] = percent_probability
-    return base_dictionary
+def generate_random_relative_word(word_list, probabilities):
+    x = creating_randomness.gen_random_range(0, 1)
+    cumalitive_probability = 0.0
+    for word, weighted_occurence in zip(word_list, probabilities):
+        cumalitive_probability += weighted_occurence
+        if x < cumalitive_probability:
+            break
+    return word
 
 
+print(generate_random_relative_word(word_list, generate_weights(word_list).values()))
 
 
 
