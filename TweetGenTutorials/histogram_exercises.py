@@ -1,9 +1,14 @@
 import creating_randomness
+import pdb
+import random
 
 word_file = open("/usr/share/dict/words")
 read_file = word_file.read()
 split_file = read_file.split()
-word_list = ["Matthew", "Corey", "Harrilal", "Corey", "Corey", "Corey", "Corey"]
+
+# Instead of hardcoding the text file you want to open you can pass it as an argument therefore it can be dynamic
+word_list = ["Matthew", "Ralph", "Harrilal", "Ralph", "Ralph", "Tyler", "Matthew"]
+
 
 # users_input = str(input())
 # users_input = "Corey"
@@ -50,14 +55,6 @@ def generate_weights(word_list):
     return weight_dictionary
 
 
-def generate_random_histogram_word():
-    # This function essentially generates a random word from the histogram
-    for word in word_list:
-        # random_word = creating_randomness.gen_random_range(word_list[0], [])
-        random_index = creating_randomness.gen_random_range(0, len(word_list) -1)
-        random_word = word_list[random_index]
-    return random_word
-
 
 def list_of_tuples_histogram():
     # This function essentially displays the histogram as a tuple rather than a dictionary
@@ -91,16 +88,56 @@ def list_of_lists_histogram():
 
 def generate_histogram_weight_with_list_lists(word_list):
     base_list = []
-    structured_list = []
+    key_and_weight_list = []
     sum_of_frequencies = (sum(histogram(word_list).values()))
     for key,value in histogram(word_list).items():
         word_occurence = word_list.count(key)
         weighted_occurence = word_occurence / sum_of_frequencies
-        if key not in structured_list:
-            structured_list = [key, weighted_occurence]
-            base_list.append(structured_list)
+        if key not in key_and_weight_list:
+            key_and_weight_list = [key, weighted_occurence]
+            base_list.append(key_and_weight_list)
     return base_list
 
+def generate_random_histogram_word():
+    # This function essentially generates a random word from the histogram
+    for word in word_list:
+        # random_word = creating_randomness.gen_random_range(word_list[0], [])
+        random_index = creating_randomness.gen_random_range(0, len(word_list) -1)
+        random_word = word_list[random_index]
+    return random_word
 
-# print(generate_histogram_weight_with_tuples(word_list))
-print(generate_histogram_weight_with_list_lists(word_list))
+#
+# def time_random():
+#     return(time() - float(str(time()).split('.')[0]))
+#
+# def gen_random_range(min, max):
+#     return int(time_random() * (max + min) - min)
+
+
+def generate_random_relative_word(word_list):
+    base_dictionary = {}
+    relative_probability = generate_weights(word_list)
+    # percent_probability = relative_probability * 100
+    for key, value in relative_probability.items():
+        percent_probability = value * 100
+        if value not in base_dictionary:
+            # base_list.append(percent_probability)
+            base_dictionary[key] = percent_probability
+    return base_dictionary
+
+
+
+
+
+
+
+
+
+def while_loops():
+    matthew = 0
+    while matthew < 7:
+        print("good")
+        matthew = matthew + 1
+
+x = creating_randomness.gen_random_range(0,1)
+print(x)
