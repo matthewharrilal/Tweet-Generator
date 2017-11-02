@@ -56,47 +56,60 @@ def generate_weights(word_list):
 
 
 
-def list_of_tuples_histogram():
-    # This function essentially displays the histogram as a tuple rather than a dictionary
-    list_of_tuples = list((zip(histogram(word_list).keys(), histogram(word_list).values())))
-    return list_of_tuples
+def list_of_tuples_histogram(word_list):
+    #So essentially what this function will consist of is making the histogram into a list of tuples
+    base_list = []
+    structured_tuple = ()
 
-def generate_histogram_weight_with_tuples(word_list):
-    #First things first what we have to do is instantiate an empty tuple
-    weight_tuple = ()
-    # We also have to find the sum of all the frequencies therefore we can find the frequency and use this to calculate into the weighted frequency
-    sum_of_frequencies = sum(histogram(word_list).values())
-
-    #Secondly we now have to gain access to the words or the elements in the array
     for word in word_list:
-        #Once we get the words we then have to find the count for the word
-        word_occurence = word_list.count(word)
-        weight_occurence = word_occurence / sum_of_frequencies
-    #     weight_tuple = weight_tuple + (word , weight_occurence)
-        if word not in weight_tuple:
-            weight_tuple = weight_tuple + (word, weight_occurence)
-    return weight_tuple
-    # return weight_tuple
+        word_tuple = (word, )
+        occurences = word_list.count(word)
+        word_occurences = occurences
+        if word not in structured_tuple:
+            structured_tuple = word_tuple + (word_occurences, )
+        if structured_tuple not in base_list:
+            base_list.append(structured_tuple)
+    second_element = [x[1] for x in base_list ]
+    return second_element
 
-def list_of_lists_histogram():
-    #This function essentially displays the histogram as a list of lists rather than a dictionary
+def generate_histogram_weights_with_tuple(word_list):
     base_list = []
-    for key, value in histogram(word_list).items():
-        structured_list = [key, value]
-        base_list.append(structured_list)
+    structured_tuple = ()
+    sum_values = sum(list_of_tuples_histogram(word_list))
+
+    for word in word_list:
+        weighted_occurences = word_list.count(word) / sum_values
+        word_tuple = (word, )
+        if word not in structured_tuple:
+            structured_tuple = word_tuple + (weighted_occurences, )
+        if structured_tuple not in base_list:
+            base_list.append(structured_tuple)
     return base_list
 
-def generate_histogram_weight_with_list_lists(word_list):
+def list_of_lists_histogram(word_list):
     base_list = []
-    key_and_weight_list = []
-    sum_of_frequencies = (sum(histogram(word_list).values()))
-    for key,value in histogram(word_list).items():
-        word_occurence = word_list.count(key)
-        weighted_occurence = word_occurence / sum_of_frequencies
-        if key not in key_and_weight_list:
-            key_and_weight_list = [key, weighted_occurence]
-            base_list.append(key_and_weight_list)
+    structured_list = []
+    for word in word_list:
+        occurences = word_list.count(word)
+        if word not in structured_list:
+            structured_list = [word,occurences]
+        if structured_list not in base_list:
+            base_list.append(structured_list)
+    second_element = [x[1] for x in base_list]
+    return second_element
+
+def generate_histogram_weight_with_list_of_lists(word_list):
+    base_list = []
+    structured_list = []
+    sum_values = sum(list_of_tuples_histogram(word_list))
+    for word in word_list:
+        weighted_occurences = word_list.count(word) / sum_values
+        if word not in structured_list:
+            structured_list = [word, weighted_occurences]
+        if structured_list not in base_list:
+            base_list.append(structured_list)
     return base_list
+
 
 def generate_random_histogram_word():
     # This function essentially generates a random word from the histogram
@@ -115,20 +128,13 @@ def generate_random_histogram_word():
 
 
 def generate_random_relative_word(word_list, probabilities):
-    x = creating_randomness.gen_random_range(0, 1)
+    randomly_generated_number = creating_randomness.gen_random_range(0, 1)
     cumalitive_probability = 0.0
     for word, weighted_occurence in zip(word_list, probabilities):
         cumalitive_probability += weighted_occurence
-        if x < cumalitive_probability:
+        if randomly_generated_number < cumalitive_probability:
             break
     return word
-
-
-print(generate_random_relative_word(word_list, generate_weights(word_list).values()))
-
-
-
-
 
 
 
@@ -138,5 +144,5 @@ def while_loops():
         print("good")
         matthew = matthew + 1
 
-x = creating_randomness.gen_random_range(0,1)
-print(x)
+# print(generate_histogram_weight_with_list_of_lists(word_list))
+print(generate_histogram_weight_with_list_of_lists(word_list))
