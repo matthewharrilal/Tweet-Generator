@@ -1,9 +1,9 @@
 import random
 import time
-
-with open("/usr/share/dict/words") as word_file:
-    read_file = word_file.read()
-    split_file = read_file.split()
+#
+# with open("/usr/share/dict/words") as word_file:
+#     read_file = word_file.read()
+#     split_file = read_file.split()
 
 # print(split_file)
 # So the goal is to now take this list and somehow provide a way to generate random grouping of these words
