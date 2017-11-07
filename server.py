@@ -7,7 +7,7 @@ import creating_randomness
 
 @app.route('/example')
 def generate_word():
-    return dictionary_words.random_sentence(dictionary_words.split_file)
+    return dictionary_words.random_sentence(histogram_exercises.word_list)
 
 
 
