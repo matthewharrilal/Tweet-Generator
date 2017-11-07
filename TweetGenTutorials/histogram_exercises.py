@@ -136,13 +136,4 @@ def generate_random_relative_word(word_list, probabilities):
             break
     return word
 
-
-
-def while_loops():
-    matthew = 0
-    while matthew < 7:
-        print("good")
-        matthew = matthew + 1
-
-# print(generate_histogram_weight_with_list_of_lists(word_list))
-print(generate_histogram_weight_with_list_of_lists(word_list))
+# print(generate_random_relative_word(word_list, generate_weights(word_list).values()))
