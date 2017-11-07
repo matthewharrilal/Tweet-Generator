@@ -2,9 +2,9 @@ import creating_randomness
 import pdb
 import random
 
-word_file = open("/usr/share/dict/words")
-read_file = word_file.read()
-split_file = read_file.split()
+# word_file = open("/usr/share/dict/words")
+# read_file = word_file.read()
+# split_file = read_file.split()
 
 # Instead of hardcoding the text file you want to open you can pass it as an argument therefore it can be dynamic
 word_list = ["Matthew", "Ralph", "Harrilal", "Ralph", "Ralph", "Tyler", "Matthew"]
