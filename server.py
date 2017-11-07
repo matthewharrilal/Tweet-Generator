@@ -5,7 +5,7 @@ import dictionary_words
 # import tweetGenTutorials
 import creating_randomness
 
-@app.route('/example',method=["GET"])
+@app.route('/example',methods="GET")
 def generate_word():
     return dictionary_words.random_sentence(histogram_exercises.word_list)
 
