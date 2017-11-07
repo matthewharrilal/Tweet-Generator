@@ -1,13 +1,13 @@
 from flask import Flask
 app = Flask(__name__)
 import histogram_exercises
-# import dictionary_words
+import dictionary_words
 # import tweetGenTutorials
 import creating_randomness
 
 @app.route('/example')
 def generate_word():
-    return histogram_exercises.generate_random_relative_word(histogram_exercises.word_list, histogram_exercises.generate_weights(histogram_exercises.word_list).values())
+    return dictionary_words.random_sentence(dictionary_words.split_file)
 
 
 

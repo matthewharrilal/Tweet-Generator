@@ -12,10 +12,10 @@ word_dictionary = {'joyful': 'feeling, expressing, or causing great pleasure and
                        'abnegation': 'the denial and rejection of a doctrine or belief'}
 
 
-amount_of_times = int(input())
+# amount_of_times = int(input())
 def random_sentence(split_file):
     sentence_array = []
-    for _ in range(amount_of_times):
+    for _ in range(10):
         random_index = random.randint(0, len(split_file) - 1)
         sentence_array.append(split_file[random_index])
     return " ".join(sentence_array)
@@ -36,8 +36,8 @@ def generate_flash_card(word_dictionary):
         print("The accurate definition of the word is %s" %(word_dictionary[random_key]))
     return ''
 
-if __name__ == '__main__':
-    start_time = time.time()
-    print(random_sentence(split_file))
-    end_time = time.time()
-    print(end_time - start_time)
+# if __name__ == '__main__':
+#     start_time = time.time()
+#     print(random_sentence(split_file))
+#     end_time = time.time()
+#     print(end_time - start_time)
