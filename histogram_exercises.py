@@ -34,6 +34,7 @@ def find_unique_words(word_list):
     return "The unique words are %s" %(unique_word)
 
 
+# GLOBAL!!!!!
 word_frequency = {}
 def histogram(word_list):
    #  This function essentially formulates the histogram
