@@ -13,6 +13,7 @@ class Listogram(list):
             word_occurences = cleaned_text.count(word)
             if word not in inner_histogram_pairs:
                 inner_histogram_pairs = [word, word_occurences]
+                print("\"{}\" appears {} times".format(word, word_occurences))
             if inner_histogram_pairs not in base_histogram_list:
                 base_histogram_list.append(inner_histogram_pairs)
         return base_histogram_list
@@ -29,15 +30,17 @@ class Listogram(list):
         return specific_word_pair_list
 
     def generate_boolean_value(self):
+        in_there = True
+        not_there = False
         user_inputted_word = str(input())
         for word in self.generate_listogram():
-            if user_inputted_word in word:
-                print('in there')
+           if user_inputted_word in word:
+               print("The word is in there")
 
-        return True
+        return
 
 
 
 
 listogram = Listogram("robert_greene.txt")
-print(listogram.generate_boolean_value())
+print(listogram.generate_listogram())
