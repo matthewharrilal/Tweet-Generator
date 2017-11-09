@@ -20,9 +20,10 @@ class Dictogram(dict):
 
 
     def generate_histogram_weights(self):
+        #This function essentially generates the weights or the relative occurence of the words in the histogram
         weight_dictionary = {}
         sum_values = sum(self.generate_histogram().values())
         for word in self.word_text:
             word_occurences = self.word_text.count(word)
             weighted_occurences = word_occurences / sum_values
-
+            weight_dictionary[word] = weighted_occurences
