@@ -138,3 +138,4 @@ def generate_random_relative_word(word_list, probabilities):
     return word
 
 # print(generate_random_relative_word(word_list, generate_weights(word_list).values()))
+print(list_of_lists_histogram(word_list))

@@ -28,8 +28,16 @@ class Listogram(list):
             return 'The word you are searching for has a frequency of 0'
         return specific_word_pair_list
 
+    def generate_boolean_value(self):
+        user_inputted_word = str(input())
+        for word in self.generate_listogram():
+            if user_inputted_word in word:
+                print('in there')
+
+        return True
+
+
+
 
 listogram = Listogram("robert_greene.txt")
-print(listogram.generate_specific_frequency())
-
-
+print(listogram.generate_boolean_value())
