@@ -31,14 +31,21 @@ class Dictogram(dict):
         return weight_dictionary
 
     def generate_specific_frequency_of_word(self, user_inputted_word):
+        # This function essentially takes a word that the user wants to find in the text and find how many times that word
+        # occurs
         specific_word_frequency = {}
         user_inputted_word = str(input())
         cleaned_text = cleanup.clean_given_text(self.word_text)
         if user_inputted_word in cleaned_text:
             specific_word_occurence = cleaned_text.count(user_inputted_word)
             specific_word_frequency[user_inputted_word] = specific_word_occurence
+        else:
+            return 'This word does not occur at all'
         return specific_word_frequency
 
 
+
+
 dictogram = Dictogram("robert_greene.txt")
-print(dictogram.generate_histogram_weights())
+
+print(dictogram.generate_specific_frequency_of_word("the"))
