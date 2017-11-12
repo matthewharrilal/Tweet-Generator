@@ -70,8 +70,8 @@ def list_of_tuples_histogram(word_list):
             structured_tuple = word_tuple + (word_occurences, )
         if structured_tuple not in base_list:
             base_list.append(structured_tuple)
-    second_element = [x[1] for x in base_list ]
-    return second_element
+
+    return base_list
 
 def generate_histogram_weights_with_tuple(word_list):
     base_list = []
@@ -138,4 +138,4 @@ def generate_random_relative_word(word_list, probabilities):
     return word
 
 # print(generate_random_relative_word(word_list, generate_weights(word_list).values()))
-print(list_of_lists_histogram(word_list))
+print(list_of_tuples_histogram(word_list))
