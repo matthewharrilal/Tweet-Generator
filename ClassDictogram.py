@@ -56,22 +56,28 @@ class Dictogram(dict):
     def develop_states_and_transitions(self):
         #Finds the states and transitions when given a corpus
         paired_text = {}
-        word_a_list = []
-        rel_probability_dictionary = {}
+        word_a_occurence_dictionary = {}
+        word_b_list = []
+        word_b_rel_probability_dictionary = {}
         cleaned_text = cleanup.clean_given_text(self.word_text)
         rarest_word = max(self.generate_histogram().values())
         for word in range(len(cleaned_text[:10]) - 1):
             paired_text[cleaned_text[word]] = cleaned_text[word + 1]
-        sum_values = len(paired_text.values())
-        print('These are the sum_values %s' %(sum_values))
-        for word_a in paired_text.keys():
-            word_a_list.append(word_a)
-        for word in word_a_list:
-            word_a_occurences = word_a_list.count(word)
-            relative_probability = word_a_occurences / sum_values
-            rel_probability_dictionary[word] = relative_probability
 
-        return rel_probability_dictionary
+        for key, value in paired_text.items():
+            word_a_occurences = list(paired_text).count(key)
+            word_a_occurence_dictionary[key] = word_a_occurences
+            word_b_list.append(value)
+        new_length = len(paired_text)
+
+        while new_length != 0:
+            for word in word_b_list:
+                word_b_frequency = word_b_list.count(word)
+                sum_all_values = len(paired_text)
+                word_b_probability = word_b_frequency /sum_all_values
+                print('%s has a %s chance of being transitioned by %s' %(paired_text.keys(), word_b_probability, paired_text.values()))
+                new_length = new_length - 1
+
 
 
 
@@ -79,7 +85,6 @@ class Dictogram(dict):
 
 
 dictogram = Dictogram("robert_greene.txt")
-
 
 print(dictogram.develop_states_and_transitions())
 
