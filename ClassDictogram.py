@@ -44,11 +44,12 @@ class Dictogram(dict):
         return specific_word_frequency
 
     def find_rarest_word(self):
-        rarest_word = []
+        rarest_word = {}
         highest_occurence = max(self.generate_histogram().values())
         for key, value in self.generate_histogram().items():
-            if key and  value not in rarest_word:
-                rarest_word = [key]
+            if value == highest_occurence:
+                rarest_word[key] = value
+        return rarest_word
 
 
 
