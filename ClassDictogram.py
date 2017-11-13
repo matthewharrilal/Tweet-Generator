@@ -56,7 +56,7 @@ class Dictogram(dict):
         paired_text = {}
         cleaned_text = cleanup.clean_given_text(self.word_text)
         rarest_word = max(self.generate_histogram().values())
-        for word in range(len(cleaned_text[:10]) - 1):
+        for word in range(len(cleaned_text[:50]) - 1):
             paired_text[cleaned_text[word]] = cleaned_text[word + 1]
         return paired_text
 
@@ -72,10 +72,9 @@ class Dictogram(dict):
                 word_b_list.append(value)
                 word_a_count = word_a_list.count(user_input_word_a)
                 word_b_count = word_b_list.count(user_input_word_b)
-                relative_probability = word_b_count / len((sorted(list(self.pair_text_together()))))
-
-        for key, value in self.pair_text_together().items():
-            word_b_occurence_dictionary[key] = {value: relative_probability}
+                relative_probability = word_b_count / (len(word_a_list) + 1)
+        print("The count of the transitional_word is %s" % (word_b_count))
+        word_b_occurence_dictionary[user_input_word_a] = {user_input_word_b: relative_probability}
         return word_b_occurence_dictionary
 
 
@@ -91,7 +90,9 @@ class Dictogram(dict):
 
 
 
-dictogram = Dictogram("robert_greene.txt")
 
-print(dictogram.develop_states_and_transitions('The', 'Project'))
+dictogram = Dictogram("robert_greene.txt")
+print(dictogram.pair_text_together())
+
+print(dictogram.develop_states_and_transitions('The', 'it'))
 
