@@ -65,6 +65,12 @@ class Dictogram(dict):
         new_word = pair_text_list.index(user_word_input) - 1
         return pair_text_list[new_word]
 
+    def generates_all_words(self):
+        word_list = []
+        cleaned_text = cleanup.clean_given_text(self.word_text)[:100]
+        for word in cleaned_text:
+            word_list.append(word)
+        return word_list
 
 
     def develop_states_and_transitions(self, user_input_word_b):
@@ -72,10 +78,9 @@ class Dictogram(dict):
         word_b_list = []
         word_b_occurence_dictionary = {}
         paired_text_list = list(self.pair_text_together())
-        pdb.set_trace()
-        user_input_occurences = paired_text_list.count(user_input_word_b)
-        rel_probability = user_input_occurences / paired_text_list.count(self.find_word_before_entry(user_input_word_b))
-        return rel_probability, paired_text_list
+        user_input_occurences = self.generates_all_words().count(user_input_word_b)
+        rel_probability = user_input_occurences / self.generates_all_words().count(self.find_word_before_entry(user_input_word_b))
+        return rel_probability, self.generates_all_words()
 
 
         # return paired_text_list
@@ -89,8 +94,10 @@ dictogram = Dictogram("robert_greene.txt")
 # print(list(dictogram.pair_text_together()))
 
 # print(dictogram.develop_states_and_transitions('the'))
-
-print(dictogram.develop_states_and_transitions('by'))
+#
+print(dictogram.develop_states_and_transitions('use'))
+#
+# print(dictogram.generates_all_words())
 
 
 
