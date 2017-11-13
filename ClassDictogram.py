@@ -51,39 +51,38 @@ class Dictogram(dict):
                 rarest_word[key] = value
         return rarest_word
 
-    word_list = ["Matthew", "Ralph", "Harrilal", "Ralph", "Ralph", "Tyler", "Matthew"]
-
-    def develop_states_and_transitions(self):
-        #Finds the states and transitions when given a corpus
+    def pair_text_together(self):
+        # Pairs a given corpus into pairs of words
         paired_text = {}
-        word_a_occurence_dictionary = {}
-        word_a_list = []
-        word_b_list = []
-
         cleaned_text = cleanup.clean_given_text(self.word_text)
         rarest_word = max(self.generate_histogram().values())
         for word in range(len(cleaned_text[:10]) - 1):
             paired_text[cleaned_text[word]] = cleaned_text[word + 1]
-
-        for key, value in paired_text.items():
-            word_a_occurences = list(paired_text).count(key)
-            word_a_occurence_dictionary[key] =
-            word_b_list.append(value)
-            word_a_list.append(key)
-        new_length = len(paired_text)
-
-        # while new_length != 0:
-        #     for word in word_b_list:
-        #         word_b_frequency = word_b_list.count(word)
-        #         sum_all_values = len(paired_text)
-        #         word_b_probability = word_b_frequency /sum_all_values
-        #         new_length = new_length - 1
-        #     for key, value in paired_text.items():
-        #          print('%s has a %s chance of being transitioned by %s' % (key, word_b_probability, value))
-        #
-
-
         return paired_text
+
+    def develop_states_and_transitions(self, user_input_word_a, user_input_word_b):
+        #Finds the states and transitions when given a corpus
+        word_b_list = []
+        word_a_list = []
+        word_b_occurence_dictionary = {}
+        for key, value in self.pair_text_together().items():
+            # When we are in this dictionary we are iterating through to get the current word and the next word
+            if user_input_word_b in self.pair_text_together().values() and user_input_word_a in self.pair_text_together().keys():
+                word_a_list.append(key)
+                word_b_list.append(value)
+                word_a_count = word_a_list.count(user_input_word_a)
+                word_b_count = word_b_list.count(user_input_word_b)
+                relative_probability = word_b_count / len((sorted(list(self.pair_text_together()))))
+
+        for key, value in self.pair_text_together().items():
+            word_b_occurence_dictionary[key] = {value: relative_probability}
+        return word_b_occurence_dictionary
+
+
+
+
+
+
 
 
 
@@ -94,5 +93,5 @@ class Dictogram(dict):
 
 dictogram = Dictogram("robert_greene.txt")
 
-print(dictogram.develop_states_and_transitions())
+print(dictogram.develop_states_and_transitions('The', 'Project'))
 
