@@ -24,7 +24,7 @@ class Dictogram(dict):
         weight_dictionary = {}
         sum_values = sum(self.generate_histogram().values())
         cleaned_text = cleanup.clean_given_text(self.word_text)
-        for word in cleaned_text[:100]:
+        for word in cleaned_text[:10]:
             word_occurences = cleaned_text.count(word)
             weighted_occurences = word_occurences / sum_values
             weight_dictionary[word] = weighted_occurences
@@ -57,8 +57,9 @@ class Dictogram(dict):
         #Finds the states and transitions when given a corpus
         paired_text = {}
         word_a_occurence_dictionary = {}
+        word_a_list = []
         word_b_list = []
-        word_b_rel_probability_dictionary = {}
+
         cleaned_text = cleanup.clean_given_text(self.word_text)
         rarest_word = max(self.generate_histogram().values())
         for word in range(len(cleaned_text[:10]) - 1):
@@ -66,17 +67,24 @@ class Dictogram(dict):
 
         for key, value in paired_text.items():
             word_a_occurences = list(paired_text).count(key)
-            word_a_occurence_dictionary[key] = word_a_occurences
+            word_a_occurence_dictionary[key] =
             word_b_list.append(value)
+            word_a_list.append(key)
         new_length = len(paired_text)
 
-        while new_length != 0:
-            for word in word_b_list:
-                word_b_frequency = word_b_list.count(word)
-                sum_all_values = len(paired_text)
-                word_b_probability = word_b_frequency /sum_all_values
-                print('%s has a %s chance of being transitioned by %s' %(paired_text.keys(), word_b_probability, paired_text.values()))
-                new_length = new_length - 1
+        # while new_length != 0:
+        #     for word in word_b_list:
+        #         word_b_frequency = word_b_list.count(word)
+        #         sum_all_values = len(paired_text)
+        #         word_b_probability = word_b_frequency /sum_all_values
+        #         new_length = new_length - 1
+        #     for key, value in paired_text.items():
+        #          print('%s has a %s chance of being transitioned by %s' % (key, word_b_probability, value))
+        #
+
+
+        return paired_text
+
 
 
 
