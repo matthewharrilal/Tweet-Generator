@@ -94,5 +94,7 @@ class Dictogram(dict):
 dictogram = Dictogram("robert_greene.txt")
 print(dictogram.pair_text_together())
 
-print(dictogram.develop_states_and_transitions('The', 'it'))
+print(dictogram.develop_states_and_transitions('The', 'Gutenberg'))
+
+
 
