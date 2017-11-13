@@ -51,22 +51,35 @@ class Dictogram(dict):
                 rarest_word[key] = value
         return rarest_word
 
-
+    word_list = ["Matthew", "Ralph", "Harrilal", "Ralph", "Ralph", "Tyler", "Matthew"]
 
     def develop_states_and_transitions(self):
         #Finds the states and transitions when given a corpus
         paired_text = {}
+        word_a_list = []
+        rel_probability_dictionary = {}
         cleaned_text = cleanup.clean_given_text(self.word_text)
         rarest_word = max(self.generate_histogram().values())
-
-        for word in range(len(cleaned_text[:100]) - 1):
+        for word in range(len(cleaned_text[:10]) - 1):
             paired_text[cleaned_text[word]] = cleaned_text[word + 1]
-            # transitional_occurences =
-        return paired_text
+        sum_values = len(paired_text.values())
+        print('These are the sum_values %s' %(sum_values))
+        for word_a in paired_text.keys():
+            word_a_list.append(word_a)
+        for word in word_a_list:
+            word_a_occurences = word_a_list.count(word)
+            relative_probability = word_a_occurences / sum_values
+            rel_probability_dictionary[word] = relative_probability
+
+        return rel_probability_dictionary
+
+
+
 
 
 
 dictogram = Dictogram("robert_greene.txt")
 
-print(dictogram.find_rarest_word())
+
+print(dictogram.develop_states_and_transitions())
 
