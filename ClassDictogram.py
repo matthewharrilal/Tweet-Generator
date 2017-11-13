@@ -24,8 +24,8 @@ class Dictogram(dict):
         weight_dictionary = {}
         sum_values = sum(self.generate_histogram().values())
         cleaned_text = cleanup.clean_given_text(self.word_text)
-        for word in cleaned_text:
-            word_occurences = self.word_text.count(word)
+        for word in cleaned_text[:100]:
+            word_occurences = cleaned_text.count(word)
             weighted_occurences = word_occurences / sum_values
             weight_dictionary[word] = weighted_occurences
         return weight_dictionary
@@ -43,9 +43,29 @@ class Dictogram(dict):
             return 'This word does not occur at all'
         return specific_word_frequency
 
+    def find_rarest_word(self):
+        rarest_word = []
+        highest_occurence = max(self.generate_histogram().values())
+        for key, value in self.generate_histogram().items():
+            if key and  value not in rarest_word:
+                rarest_word = [key]
+
+
+
+    def develop_states_and_transitions(self):
+        #Finds the states and transitions when given a corpus
+        paired_text = {}
+        cleaned_text = cleanup.clean_given_text(self.word_text)
+        rarest_word = max(self.generate_histogram().values())
+
+        for word in range(len(cleaned_text[:100]) - 1):
+            paired_text[cleaned_text[word]] = cleaned_text[word + 1]
+            # transitional_occurences =
+        return paired_text
 
 
 
 dictogram = Dictogram("robert_greene.txt")
 
-print(dictogram.generate_specific_frequency_of_word("the"))
+print(dictogram.find_rarest_word())
+

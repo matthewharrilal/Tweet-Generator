@@ -137,5 +137,4 @@ def generate_random_relative_word(word_list, probabilities):
             break
     return word
 
-# print(generate_random_relative_word(word_list, generate_weights(word_list).values()))
-print(list_of_tuples_histogram(word_list))
+print(generate_weights(word_list))
