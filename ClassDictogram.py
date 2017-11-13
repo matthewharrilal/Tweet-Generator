@@ -56,45 +56,41 @@ class Dictogram(dict):
         paired_text = {}
         cleaned_text = cleanup.clean_given_text(self.word_text)
         rarest_word = max(self.generate_histogram().values())
-        for word in range(len(cleaned_text[:50]) - 1):
+        for word in range(len(cleaned_text[:10000]) - 1):
             paired_text[cleaned_text[word]] = cleaned_text[word + 1]
         return paired_text
 
-    def develop_states_and_transitions(self, user_input_word_a, user_input_word_b):
+    def find_word_before_entry(self, user_word_input):
+        pair_text_list = list(self.pair_text_together())
+        new_word = pair_text_list.index(user_word_input) - 1
+        return pair_text_list[new_word]
+
+
+
+    def develop_states_and_transitions(self, user_input_word_b):
         #Finds the states and transitions when given a corpus
         word_b_list = []
-        word_a_list = []
         word_b_occurence_dictionary = {}
-        for key, value in self.pair_text_together().items():
-            # When we are in this dictionary we are iterating through to get the current word and the next word
-            if user_input_word_b in self.pair_text_together().values() and user_input_word_a in self.pair_text_together().keys():
-                word_a_list.append(key)
-                word_b_list.append(value)
-                word_a_count = word_a_list.count(user_input_word_a)
-                word_b_count = word_b_list.count(user_input_word_b)
-                relative_probability = word_b_count / (len(word_a_list) + 1)
-        print("The count of the transitional_word is %s" % (word_b_count))
-        word_b_occurence_dictionary[user_input_word_a] = {user_input_word_b: relative_probability}
-        return word_b_occurence_dictionary
+        paired_text_list = list(self.pair_text_together())
+        pdb.set_trace()
+        user_input_occurences = paired_text_list.count(user_input_word_b)
+        rel_probability = user_input_occurences / paired_text_list.count(self.find_word_before_entry(user_input_word_b))
+        return rel_probability, paired_text_list
 
 
-
-
-
-
-
-
-
-
-
-
+        # return paired_text_list
+        # print("The count of the transitional_word is %s" % (word_b_count))
+        # word_b_occurence_dictionary[user_input_word_a] = {user_input_word_b: relative_probability}
+        # return word_b_occurence_dictionary
 
 
 
 dictogram = Dictogram("robert_greene.txt")
-print(dictogram.pair_text_together())
+# print(list(dictogram.pair_text_together()))
 
-print(dictogram.develop_states_and_transitions('The', 'Gutenberg'))
+# print(dictogram.develop_states_and_transitions('the'))
+
+print(dictogram.develop_states_and_transitions('by'))
 
 
 
