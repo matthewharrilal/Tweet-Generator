@@ -56,11 +56,11 @@ class Dictogram(dict):
         paired_text = {}
         cleaned_text = cleanup.clean_given_text(self.word_text)
         rarest_word = max(self.generate_histogram().values())
-        for word in range(len(cleaned_text[:10000]) - 1):
+        for word in range(len(cleaned_text[:10]) - 1):
             paired_text[cleaned_text[word]] = cleaned_text[word + 1]
         return paired_text
 
-    def find_word_before_entry(self, user_word_input):
+    def find_word_after_entry(self, user_word_input):
         pair_text_list = list(self.pair_text_together())
         new_word = pair_text_list.index(user_word_input) + 1
         return pair_text_list[new_word]
@@ -76,12 +76,15 @@ class Dictogram(dict):
     def develop_states_and_transitions(self, user_input_word_b):
         #Finds the states and transitions when given a corpus
         word_b_list = []
-        word_b_occurence_dictionary = {}
+        rel_probability = {}
+        chain_dictionary = {}
         paired_text_list = list(self.pair_text_together())
         user_input_occurences = self.generates_all_words().count(user_input_word_b)
-        rel_probability = self.generates_all_words().count(self.find_word_before_entry(user_input_word_b)) / user_input_occurences
-        print('The word %s has a %s chance of occuring after %s'%(self.find_word_before_entry(user_input_word_b), rel_probability, user_input_word_b))
-        return rel_probability
+        rel_probability = self.generates_all_words().count(self.find_word_after_entry(user_input_word_b)) / user_input_occurences
+        print('The word %s has a %s chance of occuring after %s'%(self.find_word_after_entry(user_input_word_b), rel_probability, user_input_word_b))
+        for word in paired_text_list:
+            chain_dictionary[word] = {self.find_word_after_entry(user_input_word_b): rel_probability}
+        return chain_dictionary
 
 
 dictogram = Dictogram("robert_greene.txt")
@@ -89,7 +92,7 @@ dictogram = Dictogram("robert_greene.txt")
 
 # print(dictogram.develop_states_and_transitions('the'))
 #
-print(dictogram.develop_states_and_transitions('the'))
+print(dictogram.develop_states_and_transitions('Project'))
 #
 # print(dictogram.generates_all_words())
 
