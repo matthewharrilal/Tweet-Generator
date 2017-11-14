@@ -79,11 +79,14 @@ class Dictogram(dict):
         rel_probability = {}
         chain_dictionary = {}
         paired_text_list = list(self.pair_text_together())
-        user_input_occurences = self.generates_all_words().count(user_input_word_b)
-        rel_probability = self.generates_all_words().count(self.find_word_after_entry(user_input_word_b)) / user_input_occurences
-        print('The word %s has a %s chance of occuring after %s'%(self.find_word_after_entry(user_input_word_b), rel_probability, user_input_word_b))
-        for word in paired_text_list:
-            new_word = paired_text_list.index(word) + 1
+        # user_input_occurences = self.generates_all_words().count(user_input_word_b)
+        # rel_probability = self.generates_all_words().count(self.find_word_after_entry(user_input_word_b)) / user_input_occurences
+        # print('The word %s has a %s chance of occuring after %s'%(self.find_word_after_entry(user_input_word_b), rel_probability, user_input_word_b))
+        for word in self.generates_all_words():
+            next_word_occurence = self.generates_all_words().count(self.find_word_after_entry(word))
+            current_word_occurence = self.generates_all_words().count(word)
+            rel_probability = next_word_occurence / user_input_occurence
+            new_word = self.generates_all_words().index(word) + 1
             new_word_value = paired_text_list[new_word]
             chain_dictionary[word] = {self.find_word_after_entry(new_word_value): rel_probability}
         return chain_dictionary
