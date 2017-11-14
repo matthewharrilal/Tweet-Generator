@@ -80,7 +80,7 @@ class Dictogram(dict):
         paired_text_list = list(self.pair_text_together())
         user_input_occurences = self.generates_all_words().count(user_input_word_b)
         rel_probability = user_input_occurences / self.generates_all_words().count(self.find_word_before_entry(user_input_word_b))
-        return rel_probability, self.generates_all_words()
+        return rel_probability
 
 
         # return paired_text_list
