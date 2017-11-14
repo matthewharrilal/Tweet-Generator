@@ -62,7 +62,7 @@ class Dictogram(dict):
 
     def find_word_before_entry(self, user_word_input):
         pair_text_list = list(self.pair_text_together())
-        new_word = pair_text_list.index(user_word_input) - 1
+        new_word = pair_text_list.index(user_word_input) + 1
         return pair_text_list[new_word]
 
     def generates_all_words(self):
@@ -79,15 +79,9 @@ class Dictogram(dict):
         word_b_occurence_dictionary = {}
         paired_text_list = list(self.pair_text_together())
         user_input_occurences = self.generates_all_words().count(user_input_word_b)
-        rel_probability = user_input_occurences / self.generates_all_words().count(self.find_word_before_entry(user_input_word_b))
+        rel_probability = self.generates_all_words().count(self.find_word_before_entry(user_input_word_b)) / user_input_occurences
+        print('The word %s has a %s chance of occuring after %s'%(self.find_word_before_entry(user_input_word_b), rel_probability, user_input_word_b))
         return rel_probability
-
-
-        # return paired_text_list
-        # print("The count of the transitional_word is %s" % (word_b_count))
-        # word_b_occurence_dictionary[user_input_word_a] = {user_input_word_b: relative_probability}
-        # return word_b_occurence_dictionary
-
 
 
 dictogram = Dictogram("robert_greene.txt")
@@ -95,7 +89,7 @@ dictogram = Dictogram("robert_greene.txt")
 
 # print(dictogram.develop_states_and_transitions('the'))
 #
-print(dictogram.develop_states_and_transitions('use'))
+print(dictogram.develop_states_and_transitions('the'))
 #
 # print(dictogram.generates_all_words())
 
