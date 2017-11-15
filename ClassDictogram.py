@@ -112,14 +112,25 @@ class Dictogram(dict):
             cumalitve_probability += weighted_occurence
             if randomly_generated_number < cumalitve_probability:
                     break
-        return word
+        return word[0]
+
+    def generate_sentence_from_markov_chain(self, length_of_sentence):
+        sentence_list = []
+        x = 0
+        for i in range(0, length_of_sentence):
+            sentence_list.append(self.generate_random_word_from_chain())
+        sentence = ' '.join(sentence_list)
+        return sentence
 
 
 
 
 
 
-cleaned_text = cleanup.clean_given_text("robert_greene.txt")[:100]
+
+
+
+cleaned_text = cleanup.clean_given_text("robert_greene.txt")[:10]
 
 """This function essentially makes a dictionary where the keys are the current word while the value is a dictionary
 of all the possible next words"""
@@ -151,4 +162,4 @@ dictogram = markov_chain(cleaned_text)
 print(dictogram)
 # print(weighted_markov(dictogram))
 dictogram_instance = Dictogram(cleaned_text)
-print(dictogram_instance.generate_random_word_from_chain())
+print(dictogram_instance.generate_sentence_from_markov_chain(10))
