@@ -117,7 +117,7 @@ class Dictogram(dict):
     def generate_sentence_from_markov_chain(self, length_of_sentence):
         sentence_list = []
         x = 0
-        for i in range(0, length_of_sentence):
+        for i in range(length_of_sentence):
             sentence_list.append(self.generate_random_word_from_chain())
         sentence = ' '.join(sentence_list)
         return sentence
@@ -130,7 +130,7 @@ class Dictogram(dict):
 
 
 
-cleaned_text = cleanup.clean_given_text("robert_greene.txt")[:10]
+cleaned_text = cleanup.clean_given_text("robert_greene.txt")[:100]
 
 """This function essentially makes a dictionary where the keys are the current word while the value is a dictionary
 of all the possible next words"""

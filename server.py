@@ -4,11 +4,11 @@ import histogram_exercises
 import dictionary_words
 # import tweetGenTutorials
 import creating_randomness
+import ClassDictogram as d
 
 @app.route('/')
 def generate_word():
-    return dictionary_words.random_sentence(histogram_exercises.split_file)
-
+    return d.Dictogram.generate_sentence_from_markov_chain(10)
 
 
 
