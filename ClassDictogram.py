@@ -1,6 +1,7 @@
 
 import cleanup
 import pdb
+import random
 
 class Dictogram(dict):
     def __init__(self, word_text=None):
@@ -12,16 +13,19 @@ class Dictogram(dict):
 
 
     '''Generates a dictogram given a piece of text'''
-    def generate_histogram(self):
+    def generate_histogram(self, word_text):
         '''This function generates our histogram for us'''
         word_frequency = {}
-        cleaned_text = cleanup.clean_given_text(self.word_text)[:100]
+        self.word_text = word_text
+        cleaned_text = cleanup.clean_given_text(self.word_text)[:10]
         for word in cleaned_text:
             word_occurences = cleaned_text.count(word)
             word_frequency[word] = word_occurences
         return word_frequency
 
     def add_count(self, word, count=1):
+        '''This function essentially adds a count if the word is not in the dictogram I want you to add the key
+        as well as give that key a count as a value else if if it is in there already I want you to add the count of 1'''
         if word not in self:
             self[word] = count
         else:
@@ -30,13 +34,11 @@ class Dictogram(dict):
 
     def generate_histogram_weights(self):
         #This function essentially generates the weights or the relative occurence of the words in the histogram
+        '''We have to remember at this point the dictionary in self is not the chain just a regular dictionary'''
         weight_dictionary = {}
-        sum_values = sum(self.generate_histogram().values())
-        cleaned_text = cleanup.clean_given_text(self.word_text)
-        for word in cleaned_text[:10]:
-            word_occurences = cleaned_text.count(word)
-            weighted_occurences = word_occurences / sum_values
-            weight_dictionary[word] = weighted_occurences
+        sum_values = sum([val for val in self.values()])
+        for key, value in self.items():
+            weight_dictionary[key] = value / sum_values
         return weight_dictionary
 
     def generate_specific_frequency_of_word(self, user_inputted_word):
@@ -101,10 +103,20 @@ class Dictogram(dict):
                 count = count + 1
         return chain_dictionary
 
-    # def markov_chain(self):
-    #     markov_dictionary = {}
-    #     if word not in markov_dictionary.keys():
-    #         markov_dictionary[word] =
+    def generate_random_word_from_chain(self):
+        generated_random_word_dictionary = {}
+        randomly_generated_number = random.uniform(0, 1)
+        cumalitve_probability = 0.0
+        for word, weighted_occurence in zip(self.items(), self.generate_histogram_weights().values()):
+            # index_of_value =index_of_value
+            cumalitve_probability += weighted_occurence
+            if randomly_generated_number < cumalitve_probability:
+                    break
+        return word
+
+
+
+
 
 
 cleaned_text = cleanup.clean_given_text("robert_greene.txt")[:100]
@@ -112,7 +124,7 @@ cleaned_text = cleanup.clean_given_text("robert_greene.txt")[:100]
 """This function essentially makes a dictionary where the keys are the current word while the value is a dictionary
 of all the possible next words"""
 def markov_chain(cleaned_text):
-    print(cleaned_text)
+
     markov_dictionary = {}
     x = 0
     while x < len(cleaned_text) -1:
@@ -120,11 +132,23 @@ def markov_chain(cleaned_text):
         next_word = cleaned_text[x + 1]
         if current_word not in markov_dictionary.keys():
             markov_dictionary[current_word] = Dictogram() # THIS IS EQUAL TO THAT BECAUSE WE DONT HAVE TO PASS IN THE TEXT YET{}
+
         markov_dictionary[current_word].add_count(next_word)
         x += 1
     # print(markov_dictionary)
     return markov_dictionary
 
-# print(markov_chain(cleaned_text))
-print(markov_chain("one fish two fish red fish blue fish".split()))
-# print(dictogram)
+def weighted_markov(markov):
+    weighted_markov_dictionary = {}
+    for key ,value in markov.items():
+        weighted_markov_dictionary[key] = value.generate_histogram_weights()
+    return weighted_markov_dictionary
+
+
+
+
+dictogram = markov_chain(cleaned_text)
+print(dictogram)
+# print(weighted_markov(dictogram))
+dictogram_instance = Dictogram(cleaned_text)
+print(dictogram_instance.generate_random_word_from_chain())

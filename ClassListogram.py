@@ -3,7 +3,10 @@ import pdb
 
 class Listogram(list):
     def __init__(self, word_text):
-        self.word_text = word_text
+        if word_text:
+            self.word_text = word_text
+            for word in self.word_text:
+                self.add_count(word)
 
     def generate_listogram(self):
         word_occurences_dictionary = {}
@@ -22,6 +25,9 @@ class Listogram(list):
                 base_histogram_list.append(inner_histogram_pairs)
         print('%s tokens, %s types' %(sum(word_occurences_dictionary.values()), len(word_occurences_dictionary)))
         return base_histogram_list
+
+    def add_count(self):
+        pass
 
     def generate_specific_frequency(self):
         specific_word_pair_list = []
