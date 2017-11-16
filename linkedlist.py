@@ -1,4 +1,6 @@
 
+import pdb
+
 class Node(object):
 
     def __init__(self, data):
@@ -97,6 +99,7 @@ class LinkedList(object):
         # And then when this iteration is done we should be left of with the next node because the loop stops before the last node can become the current node
         # therefore we then want to set that last node to the current node therefore we can know that the current node now points to nothing therefore the end of the list
         current_node.next = new_node
+        return new_node
 
     def display_all_nodes(self):
         # Essentially in this function we want to display all the nodes in our linked list therefore we are going to need a list
@@ -121,12 +124,30 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
 
-    def find(self, quality):
+    def find(self, index):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+
+
+        # Essentially if the index of the node the user is trying to find is greater than the length of the list therefore we print out a fatal error
+        if index >= len(self.display_all_nodes()):
+            return ("FATAL ERROR: LIST INDEX GOT OUT OF RANGE")
+
+        # However if they give in a valid index we can then search for that as well as set the current node
+        current_index_of_node = 0
+        current_node = self.head
+        node_dictionary = {}
+
+        while True:
+            print("This is the length of the list %s" % (len(self.display_all_nodes())))
+            current_node = current_node.next
+            if current_index_of_node == index:
+                return current_node
+            current_index_of_node += 1
+        return current_node
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -166,4 +187,9 @@ def test_linked_list():
         print('length: {}'.format(ll.length()))
 
 my_list = LinkedList()
-print(my_list.length())
+my_list.append('Matthew Harrilal')
+my_list.append('Steven Spielberg')
+my_list.append('Tony Hawk')
+
+print(my_list.display_all_nodes()[0])
+print('The node at the index you are trying to look for is %s' %(my_list.find(1)))
