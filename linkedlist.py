@@ -74,7 +74,7 @@ class LinkedList(object):
 
             # Essentially in these lines of code what we are doing is that we are incrementing the count everytime we iterate and then from there we set the current node to the next node
             # so that the list doesnt crash when the loop is over
-            total += total
+            total += 1
             current_node = current_node.next
         return total
 
@@ -166,37 +166,26 @@ class LinkedList(object):
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
         current_node = self.head
-        new_list = []
-        count = 0
-        new_list = self.display_all_nodes()
+        current_index = 0
 
-        # Some simple error handling to see if the items the user passed in is even valid item in the linked list
-        if item not in new_list:
-            print('FATAL ERROR: ITEM NOT IN LIST')
+        # Some simple error handling to see if the items the user passed in is even in the linked list
+        print(self.length())
+        if item >= self.length():
+            print('FATAL ERROR: ITEM DOES NOT EXIST IN LINKED LIST')
             return
-            # So we essentially dont get a list index out of range error
-        while current_node.next != None:
 
-            # First we get the index of the word the user is searching for in the linked list
-            index_of_desired_node = new_list.index(item)
 
-            # Then we get the index  of the node right before it
-            index_of_previous_node = index_of_desired_node - 1
+        # Why while True?
+        while True:
 
-            # Now that we have the previous node index we can now find the element that is at that index
-            previous_node = new_list[index_of_previous_node]
-
-            # We set the previous node once we have found that value to to the current node
+            # When the user passes in the index the user we want to get the previous index and at that previous index get the elemet at that index however we have not declared that the previous index holds that yet
             previous_node = current_node
-
-            # We then set the current node equal to the next node in the list so we can keep iterating through the linked list
             current_node = current_node.next
-
-            # We then set the node where it was once our current node then we made it to our next node basically the node before it became our next node equal to the actual next current code essentially making
-            # two hills and the pointer is when you flatten out the stuff inbetween the two hills and have a straight line which is essentially the pointer
-            previous_node.next = current_node.next
-        return current_node, 'And the new list is %s' %(new_list)
-
+            if current_index == item:
+                previous_node.next = current_node.next
+                return
+            print(current_node)
+            current_index += 1
 
 
 
@@ -236,6 +225,6 @@ my_list.append('Tony Hawk')
 my_list.append('Corey')
 
 print(my_list.display_all_nodes())
-print(my_list.delete('Tony Hawk'))
+print(my_list.delete(2))
 
 # print('The node at the index you are trying to look for is %s' %(my_list.find(1)))
