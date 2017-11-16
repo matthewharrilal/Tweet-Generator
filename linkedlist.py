@@ -160,13 +160,21 @@ class LinkedList(object):
 
         current_node = self.head
         new_list = []
+        count = 0
+        new_list = self.display_all_nodes()
 
-        if item in self.display_all_nodes():
-            new_list = self.display_all_nodes()
-            index_of_item = new_list.index(item)
-            deleted_element = new_list.pop(index_of_item)
-        current_node = current_node.next
-        return new_list
+        while current_node.next != None:
+            if item in new_list:
+                index_of_desired_node = new_list.index(item)
+                index_of_previous_node = index_of_desired_node - 1
+                new_list.pop(index_of_desired_node)
+                previous_node = new_list[index_of_desired_node]
+                # Now that we have the previous node we then have to make that point to the next node somehow the only node w ehvae os far is the current node which the head is pointing to
+                # but since we are iterating through the current node is the one we just dleted therefore we make the previous node the current node
+                previous_node = current_node
+            previous_node = previous_node.next
+            return previous_node
+
 
 def test_linked_list():
     ll = LinkedList()
@@ -201,5 +209,5 @@ my_list.append('Steven Spielberg')
 my_list.append('Tony Hawk')
 
 print(my_list.display_all_nodes())
-print(my_list.find(1))
+print(my_list.delete('Steven Spielberg'))
 # print('The node at the index you are trying to look for is %s' %(my_list.find(1)))
