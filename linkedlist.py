@@ -98,6 +98,23 @@ class LinkedList(object):
         # therefore we then want to set that last node to the current node therefore we can know that the current node now points to nothing therefore the end of the list
         current_node.next = new_node
 
+    def display_all_nodes(self):
+        # Essentially in this function we want to display all the nodes in our linked list therefore we are going to need a list
+        list_of_nodes = []
+
+        # Sets the pointer of where the head points to the fist current node therefore when we loop we get other  nodes
+        current_node = self.head
+
+        # As we discussed before this is to keep the error being thrown at us that the list is going out of range
+        while current_node.next != None:
+
+            # Set the next node to the new current node every succeful iteration this contributes how we populate each element in the list
+            current_node = current_node.next
+
+            # We dont care about how many nodes they are we care about the data within the nodes which is the property that we have initalized
+            list_of_nodes.append(current_node.data)
+        return list_of_nodes
+
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
@@ -147,3 +164,6 @@ def test_linked_list():
         print('head: {}'.format(ll.head))
         print('tail: {}'.format(ll.tail))
         print('length: {}'.format(ll.length()))
+
+my_list = LinkedList()
+print(my_list.length())
