@@ -124,6 +124,13 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
 
+        # First we have to set the first node to the pointer that the head points to
+        current_node = self.head
+
+        # But since we are prepending essentially we have to create a new node and we can not do it the inital way we thought which is essentially by appending due to the simple reason that we dont want one
+        # at the end of th
+
+
     def find(self, index):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
@@ -162,16 +169,32 @@ class LinkedList(object):
         new_list = []
         count = 0
         new_list = self.display_all_nodes()
+
+        # Some simple error handling to see if the items the user passed in is even valid item in the linked list
         if item not in new_list:
             print('FATAL ERROR: ITEM NOT IN LIST')
+            return
+            # So we essentially dont get a list index out of range error
         while current_node.next != None:
-            index_of_desired_node = new_list.index(item)
-            index_of_previous_node = index_of_desired_node - 1
-            previous_node = new_list[index_of_previous_node]
-            previous_node = current_node
-            current_node = current_node.next
-            previous_node.next = current_node.next
 
+            # First we get the index of the word the user is searching for in the linked list
+            index_of_desired_node = new_list.index(item)
+
+            # Then we get the index  of the node right before it
+            index_of_previous_node = index_of_desired_node - 1
+
+            # Now that we have the previous node index we can now find the element that is at that index
+            previous_node = new_list[index_of_previous_node]
+
+            # We set the previous node once we have found that value to to the current node
+            previous_node = current_node
+
+            # We then set the current node equal to the next node in the list so we can keep iterating through the linked list
+            current_node = current_node.next
+
+            # We then set the node where it was once our current node then we made it to our next node basically the node before it became our next node equal to the actual next current code essentially making
+            # two hills and the pointer is when you flatten out the stuff inbetween the two hills and have a straight line which is essentially the pointer
+            previous_node.next = current_node.next
         return current_node, 'And the new list is %s' %(new_list)
 
 
@@ -210,8 +233,9 @@ my_list = LinkedList()
 my_list.append('Matthew Harrilal')
 my_list.append('Steven Spielberg')
 my_list.append('Tony Hawk')
+my_list.append('Corey')
 
 print(my_list.display_all_nodes())
-print(my_list.delete('Steven Spielberg'))
+print(my_list.delete('Tony Hawk'))
 
 # print('The node at the index you are trying to look for is %s' %(my_list.find(1)))
