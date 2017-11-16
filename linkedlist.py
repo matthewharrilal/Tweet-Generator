@@ -158,6 +158,15 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
+        current_node = self.head
+        new_list = []
+
+        if item in self.display_all_nodes():
+            new_list = self.display_all_nodes()
+            index_of_item = new_list.index(item)
+            deleted_element = new_list.pop(index_of_item)
+        current_node = current_node.next
+        return new_list
 
 def test_linked_list():
     ll = LinkedList()
@@ -191,5 +200,6 @@ my_list.append('Matthew Harrilal')
 my_list.append('Steven Spielberg')
 my_list.append('Tony Hawk')
 
-print(my_list.display_all_nodes()[0])
-print('The node at the index you are trying to look for is %s' %(my_list.find(1)))
+print(my_list.display_all_nodes())
+print(my_list.find(1))
+# print('The node at the index you are trying to look for is %s' %(my_list.find(1)))
