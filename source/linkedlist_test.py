@@ -1,6 +1,8 @@
+#!python
+
 from linkedlist import LinkedList, Node
-import pytest
 import unittest
+
 
 class NodeTest(unittest.TestCase):
 
@@ -76,7 +78,7 @@ class LinkedListTest(unittest.TestCase):
         # Prepend should increase length
         ll.prepend('C')
         assert ll.length() == 1
-        ll.prepend('B')locals()
+        ll.prepend('B')
         assert ll.length() == 2
         ll.prepend('A')
         assert ll.length() == 3

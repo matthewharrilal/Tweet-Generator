@@ -118,17 +118,22 @@ class LinkedList(object):
             list_of_nodes.append(current_node.data)
         return list_of_nodes
 
-    def prepend(self, item):
-        """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+    # def prepend(self, item):
+    #     """Insert the given item at the head of this linked list.
+    #     TODO: Running time: O(???) Why and under what conditions?"""
+    #     # TODO: Create new node to hold given item
+    #     # # TODO: Prepend node before head, if it exists
+    #     #
+    #     # # First we have to set the first node to the pointer that the head points to
+    #     # current_node = self.head
+    #     #
+    #     # # Now that we have the current node or essentially the node to where it is being pointed to by the head which is a pointer we have instantiate a new node due to the fact that we just cant append becuase that puts
+    #     # # it at the end of the list whereas we need it at the beginning
+    #     # instantiated_node = Node(item)
+    #     #
+    #     #
+    #     # return instantiated_node
 
-        # First we have to set the first node to the pointer that the head points to
-        current_node = self.head
-
-        # But since we are prepending essentially we have to create a new node and we can not do it the inital way we thought which is essentially by appending due to the simple reason that we dont want one
-        # at the end of th
 
 
     def find(self, index):
@@ -180,11 +185,22 @@ class LinkedList(object):
 
             # When the user passes in the index the user we want to get the previous index and at that previous index get the elemet at that index however we have not declared that the previous index holds that yet
             previous_node = current_node
+
+            # Not to be confused with the previous node we just set we are taking the current node and setting it to the next node therefore even though it says the previous node is the current node
+            # it is now the previous since the actual current node bumped up a slot when we sent it to the next node
             current_node = current_node.next
+
+            # Everytime we iterate we increment the count by 1 therefore every iteration it checks if the counter we made as the index is equal to the index the user passed in
             if current_index == item:
+
+                # When the event arises that the counter reaches the idex the user passed in what we do from there is essentially we set that previous node we were talking about earlier to the current nodes next node we are
+                # essentially linking the two nodes therefore by linking we set the pointer of the node to the current node essentially then the current node was the once previous node
                 previous_node.next = current_node.next
                 return
-            print(current_node)
+            print(current_node.data)
+
+            # After every iteration we increment by 1 and we know its going to increment the for loop everytime due to the reason that we are in a while statement saying that while true gets broken when the for loop succesfully
+            # executes which is when the count reaches the value that the user passed in as the index
             current_index += 1
 
 
@@ -225,6 +241,6 @@ my_list.append('Tony Hawk')
 my_list.append('Corey')
 
 print(my_list.display_all_nodes())
-print(my_list.delete(2))
+print(my_list.delete(3))
 
 # print('The node at the index you are trying to look for is %s' %(my_list.find(1)))
