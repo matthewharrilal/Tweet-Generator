@@ -178,9 +178,20 @@ class LinkedList(object):
             # We start iterating through and we set that current node to the next node and then we have now a current node next node as well as previous node
             current_node = current_node.next
 
+            # When the name of the item the user passes in matches the data of the node we are looking for
             if current_node.data == item:
 
+                # We then set the pointer of the previous node to the node after the current node
                 previous_node.next = current_node.next
+
+
+                # If the length of the list is only one we have to go about deleting the node in a different way
+                if self.length() == 1:
+
+                    # We have to tell the head and the tail not to point anything because what they are pointing to is about to be deleted
+                    self.head = None
+                    self.tail = None
+                    return
                 return
 
 
