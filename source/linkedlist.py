@@ -83,27 +83,20 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
 
-        # First we are creating a new node this node does not know that it is the newest node just yet just know it is the current node
         new_node = Node(item)
+
         current_node = self.head
 
-        # We are setting the head to the current node
-        if self.head is None:
-            self.head = new_node
-            self.tail = self.head
+
+
+        while current_node is not None:
+            new_node.next = current_node
+
+            new_node = self.head
+
             return
 
-        # We know that when the current nodes next node is none we have reached the end of our linked list therefore we stop the loop
-        while current_node.next != None:
-            # Everytime we iterate we succesfully have a new node therefore we want to set that new node to the current node so the next iteration can begin
-            current_node = current_node.next
 
-        # And then when this iteration is done we should be left of with the next node because the loop stops before the last node can become the current node
-        # therefore we then want to set that last node to the current node therefore we can know that the current node now points to nothing therefore the end of the list
-
-        current_node.next = new_node
-        self.tail = new_node
-        return new_node
 
 
     def display_all_nodes(self):
@@ -141,20 +134,22 @@ class LinkedList(object):
 
 
 
-    def find(self, index):
+    def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node.data == quality:
+                return 'You have found the node: %s'%(current_node.data)
+            else:
+                return 'FATAL ERROR ITEM NOT IN LIST'
+            current_node = current_node.next
 
 
-        node = self.head
-
-        while node is not None:
-            if node.data == 'index':
-                return node.data
-        node = node.next
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -170,7 +165,7 @@ class LinkedList(object):
         current_node = self.head
 
         # Until the data of the node matches the name of the item we do not stop iterating
-        while current_node:
+        while current_node is not None:
 
             # We start iterating through by setting the previous node to the current node everytime we iterate through the loop
             previous_node = current_node
@@ -192,8 +187,23 @@ class LinkedList(object):
                     self.head = None
                     self.tail = None
                     return
-                return
+                if item == self.tail:
 
+                    # If the user is trying to delete the last node of the list essentially where the tail is pointing we
+                    # set the previous node next node to none so it knows we are pointing to None
+                    previous_node.next = None
+
+                    # We then set the tail to the previous node
+                    previous_node = self.tail
+                if item == self.head:
+
+                    # If the user trys to delete the first node we set the pointer of the head to that nodes next node
+                    current_node.next = self.head
+
+                    # We then set the current node to None to basically say it doesnt exist
+                    current_node = None
+                return
+        raise ValueError('Item not found: {}'.format(item))
 
 
 
@@ -223,6 +233,5 @@ def test_linked_list():
         print('head: {}'.format(ll.head))
         print('tail: {}'.format(ll.tail))
         print('length: {}'.format(ll.length()))
-
 
 test_linked_list()
