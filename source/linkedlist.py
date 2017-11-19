@@ -87,14 +87,18 @@ class LinkedList(object):
 
         current_node = self.head
 
+        count = self.length()
 
-
-        while current_node is not None:
-            new_node.next = current_node
-
-            new_node = self.head
-
+        if count == 0:
+            self.head = new_node
+            self.tail = new_node
             return
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+            return
+
+
 
 
 
