@@ -83,24 +83,27 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
 
+
+        # Instantiate a node to represent what the user wants to append to the end of the list
         new_node = Node(item)
 
+        # In the case where the list is not empty we taking in account the first possible node
         current_node = self.head
 
+        # Take in account of the linked list in its current state
         count = self.length()
 
         if count == 0:
+            # The reason that we assign the head and the tail to the new node in this fashion is due to to the fact that the node has to be instantiated
+            # Therfore we assign the head and the tail to it where as when we set current_node.next to the head and the tail is because it already exists
             self.head = new_node
             self.tail = new_node
             return
         else:
+            # Instead of having to iterate through the whole list we can just locate the end of the list and append there
             self.tail.next = new_node
             self.tail = new_node
             return
-
-
-
-
 
 
     def display_all_nodes(self):
@@ -171,34 +174,40 @@ class LinkedList(object):
         # Until the data of the node matches the name of the item we do not stop iterating
         while current_node is not None:
 
+
             # We start iterating through by setting the previous node to the current node everytime we iterate through the loop
             previous_node = current_node
 
             # We start iterating through and we set that current node to the next node and then we have now a current node next node as well as previous node
             current_node = current_node.next
 
+            if self.length() == 1:
+            #
+            #     # We have to tell the head and the tail not to point anything because what they are pointing to is about to be deleted
+                self.head = None
+                self.tail = None
+                return
             # When the name of the item the user passes in matches the data of the node we are looking for
             if current_node.data == item:
 
                 # We then set the pointer of the previous node to the node after the current node
                 previous_node.next = current_node.next
 
-
                 # If the length of the list is only one we have to go about deleting the node in a different way
-                if self.length() == 1:
+                #
 
-                    # We have to tell the head and the tail not to point anything because what they are pointing to is about to be deleted
-                    self.head = None
-                    self.tail = None
-                    return
-                if item == self.tail:
+                if item == self.tail.data:
 
                     # If the user is trying to delete the last node of the list essentially where the tail is pointing we
                     # set the previous node next node to none so it knows we are pointing to None
-                    previous_node.next = None
 
+                    previous_node.next = None
+                    self.tail = previous_node
+
+
+                    return
                     # We then set the tail to the previous node
-                    previous_node = self.tail
+
                 if item == self.head:
 
                     # If the user trys to delete the first node we set the pointer of the head to that nodes next node
@@ -207,6 +216,8 @@ class LinkedList(object):
                     # We then set the current node to None to basically say it doesnt exist
                     current_node = None
                 return
+
+
         raise ValueError('Item not found: {}'.format(item))
 
 
