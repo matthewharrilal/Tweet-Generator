@@ -129,12 +129,19 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # # TODO: Prepend node before head, if it exists
 
+
+
+        # We have to instantiate a new node and that represents what the user wants to prepend
         new_node = Node(item)
 
-        current_node = self.head
+        # accounting for the case where the length of the linked list is 0 then when we prepend we want the head as well as the tail to be pointing to the node we had instantiated
+        if self.length() == 0:
+            self.tail = new_node
 
-        new_node.next = current_node
-
+        else:
+            # What this is essentially saying that we have to set the new nodes next values pointer equal to the old head this essentially gives us a previous value
+            new_node.next = self.head
+        # Then we establish that the pointer of the head is pointing to the new node that we had instantiated
         self.head = new_node
 
 
