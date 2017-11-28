@@ -123,21 +123,19 @@ class LinkedList(object):
             list_of_nodes.append(current_node.data)
         return list_of_nodes
 
-    # def prepend(self, item):
-    #     """Insert the given item at the head of this linked list.
-    #     TODO: Running time: O(???) Why and under what conditions?"""
-    #     # TODO: Create new node to hold given item
-    #     # # TODO: Prepend node before head, if it exists
-    #     #
-    #     # # First we have to set the first node to the pointer that the head points to
-    #     # current_node = self.head
-    #     #
-    #     # # Now that we have the current node or essentially the node to where it is being pointed to by the head which is a pointer we have instantiate a new node due to the fact that we just cant append becuase that puts
-    #     # # it at the end of the list whereas we need it at the beginning
-    #     # instantiated_node = Node(item)
-    #     #
-    #     #
-    #     # return instantiated_node
+    def prepend(self, item):
+        """Insert the given item at the head of this linked list.
+        TODO: Running time: O(???) Why and under what conditions?"""
+        # TODO: Create new node to hold given item
+        # # TODO: Prepend node before head, if it exists
+
+        new_node = Node(item)
+
+        current_node = self.head
+
+        new_node.next = current_node
+
+        self.head = new_node
 
 
 
@@ -208,7 +206,7 @@ class LinkedList(object):
                     return
                     # We then set the tail to the previous node
 
-                if item == self.head:
+                if item == self.head.data:
 
                     # If the user trys to delete the first node we set the pointer of the head to that nodes next node
                     current_node.next = self.head
