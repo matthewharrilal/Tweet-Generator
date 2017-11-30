@@ -80,7 +80,14 @@ class HashTable(object):
         if self.buckets[bucket_index] is None:
             raise KeyError('Key not found: {}'.format(key))
         else:
-            # If we come into
+            # If we come into this else block we know that the bucket does contain values we do not know how many though therefore
+            # we have to start iterating through and see when the key in the pair matches the key the user has passed in
+            for pair in self.buckets[bucket_index]:
+                if pair[0] == key:
+                    # Since we know that the pairs are a list constructed of key value pairs we know that the second element is the
+                    # value for the key
+                    return pair[1]
+
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
