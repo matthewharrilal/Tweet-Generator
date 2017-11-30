@@ -85,3 +85,10 @@ class HashTable:
             if self.map[bucket_of_key][pair][0] == key:
                 self.map[bucket_of_key].remove(pair)
                 return True
+
+    def print(self):
+        # Iterate through all the buckets in the hash table
+        for item in self.map:
+            # Check if that item exists and if it does print that item out
+            if item is not None:
+                print(str(item))
