@@ -20,9 +20,14 @@
 =======
 |   6   | Thursday, November 9  | [Generating Sentences](Class6.md)        |
 |   7   |  Tuesday, November 14 | [Arrays & Linked Lists](Class7.md)       |
+<<<<<<< HEAD
 >>>>>>> 99650474bfdab6ef530eb3a6c82cbf0d22023f95
 |   8   | Thursday, November 16 | Hash Tables                 |
 |   9   |  Tuesday, November 28 | Algorithm Analysis          |
+=======
+|   8   | Thursday, November 16 | [Hash Tables](Class8.md)                 |
+|   9   |  Tuesday, November 28 | [Algorithm Analysis](Class9.md)          |
+>>>>>>> 3dd10415b2c23cda2b43f36cd1695d263011702f
 |  10   | Thursday, November 30 | Higher Order Markov Chains |
 |  11   |  Tuesday, December 5  | Regular Expressions        |
 |  12   | Thursday, December 7  | Parsing & Tokenization     |
