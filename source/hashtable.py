@@ -64,6 +64,20 @@ class HashTable(object):
         # TODO: Find bucket where given key belongs
         # TODO: Check if key-value entry exists in bucket
 
+        # So to even see if the bucket contains the key the user is looking for we have to get the location of the bucket
+        bucket_index = self._bucket_index(key)
+
+        # Now that we have the location of the bucket we now have to see if the bucket even contains any values before we start searching
+        if self.buckets[bucket_index] is None:
+            print('There were no values in this bucket to begin with')
+            return
+
+        for pair in self.buckets[bucket_index]:
+            if key == pair[0]:
+                return True
+            else:
+                return False
+
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?"""
