@@ -172,9 +172,15 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
+        # The reason that we use the is empty function opposed to the length function then we rather go to the direct to checking if the head is there
+        # as oppose to iterating through the values and seeing nothing is in there
+        if self.is_empty():
+            raise ValueError('Item not found: {}'.format(item))
 
         # Setting the pointer of the head to point to the first node
         current_node = self.head
+
+
 
         if self.length() == 1:
             #
@@ -189,6 +195,13 @@ class LinkedList(object):
             # This gives us three positions the previous node the current node and the next node
             previous_node = current_node
             current_node = current_node.next
+
+            # The reason that we have to put this statement inside the loop is becuase if the user is trying to delete an item that is
+            # not in the linked list we will be caught in an infinite loop therefore we have to return after its done iterating thorugh all
+            # the values and we know we are done because we have the current node
+            if current_node is None:
+                raise ValueError('Item not found: {}'.format(item))
+
 
         # Since we have the node the user is trying to delete we then have to verify if the node that is trying to be deleted is the head
         if current_node == self.head:
