@@ -154,12 +154,14 @@ class LinkedList(object):
         # TODO: Check if node's data satisfies given quality function
         current_node = self.head
 
-        while current_node is not None:
-            if current_node.data == quality:
-                return 'You have found the node: %s'%(current_node.data)
-            else:
-                return 'FATAL ERROR ITEM NOT IN LIST'
+
+
+        while current_node.data != quality:
             current_node = current_node.next
+            if current_node is None:
+                # raise ValueError('Item not found: {}'.format(quality))
+                return None
+        return current_node.data
 
 
 
