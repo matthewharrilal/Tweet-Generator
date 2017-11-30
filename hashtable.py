@@ -50,4 +50,22 @@ class HashTable:
                     pair[1] = value
                     return True
             # And if the key that the user is trying to append is a key that we can not find in the list we then append the key value pair
+            # but keep in mind we are actually at a state where we can confirm that the reason we append and not not just contstruct a new
+            # list like in the if block is due to the reason that we there are actual value present at that index therefore to avoid
+            # collisions we simply append another list to that bucket
             self.map[key_index].append(key_value)
+
+    def get(self, key):
+        # When the user passes in a key we want to be able to find the value associated with that key
+        key_value = self.get_index(key)
+
+        # If there are actually values at this index of the key that the user is passing in
+        if self.map[key_value] is not None:
+
+            # Since we know there are values however we dont know how many iterate through the bukets at that given index
+            for pair in self.map[key_value]:
+                # If that key which is that first element in the list is equal to the key that the user passes in
+                if pair[0] == key:
+                    # Return the value for the key that we confirmed is the key that the user passed in
+                    return pair[1]
+        return None
