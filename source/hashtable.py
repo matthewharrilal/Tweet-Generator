@@ -2,7 +2,6 @@
 
 from linkedlist import LinkedList
 
-
 class HashTable(object):
 
     def __init__(self, init_size=8):
@@ -41,7 +40,8 @@ class HashTable(object):
         # TODO: Collect all values in each bucket
         for bucket in self.buckets:
             if bucket is not None:
-                print(str(bucket)) # Do not waste our time with empty buckets
+                for node in bucket:
+                    print(node[1])
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
@@ -73,6 +73,15 @@ class HashTable(object):
         # TODO: Otherwise, raise error to tell user get failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
 
+       # To even get the key that the user passes in we first have to find the bucket it is in
+        bucket_index = self._bucket_index(key)
+
+        # Now that we have the location of the bucket we have to first check if there are even any values in the bucket
+        if self.buckets[bucket_index] is None:
+            raise KeyError('Key not found: {}'.format(key))
+        else:
+            # If we come into
+
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         TODO: Running time: O(???) Why and under what conditions?"""
@@ -80,6 +89,36 @@ class HashTable(object):
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
+
+        # Going to insert data at a specific index therefore we first have to get the index of the bucket
+        bucket_index = self._bucket_index(key)
+
+        # Since we are solving this with lists we can hold the key value pairs in a list
+        key_value = [key, value]
+
+        # We should hold the desired bucket somewhere just so we can call it
+
+
+        # Now that we have the index of the bucket we have to see if there are any values if theres none then we can just set the data if there is we are going to have to append a node
+        if self.buckets[bucket_index] is None:
+            self.buckets[bucket_index] = key_value
+            return True
+        # Now that we have established that the bucket does actually have values we then face the problem where we actually
+        # do not know how many values are in the bucket therefore we have to iterate
+        else:
+            for pair in self.buckets[bucket_index]:
+                # The reason we can do this is due to the reason that we know that the first element at 0 is always going to be the key
+                if pair[0] == key:
+                    # If the user tries to add to a key that already exists then we simply update the value
+                    # Why do we have to update the value that is just overwriting it does this purposefully avoid collisions?
+                    # Why overwrite it shouldnt we add another pair
+                    pair[1] = value
+                    return True
+            # However if the user passes in a key that doesnt exist in the bucket we simply make another pair for it
+            self.buckets[bucket_index].append(key_value)
+
+
+
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -122,5 +161,6 @@ def test_hash_table():
         print('length: {}'.format(ht.length()))
 
 
-if __name__ == '__main__':
-    test_hash_table()
+# if __name__ == '__main__':
+    # test_hash_table()
+

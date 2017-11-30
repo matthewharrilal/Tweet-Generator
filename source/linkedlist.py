@@ -254,4 +254,9 @@ def test_linked_list():
         print('tail: {}'.format(ll.tail))
         print('length: {}'.format(ll.length()))
 
-test_linked_list()
+
+linked = LinkedList()
+
+linked.append("Matthew")
+linked.append("Steven")
+print(linked.length())
