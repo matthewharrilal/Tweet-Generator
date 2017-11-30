@@ -1,28 +1,24 @@
-
 class HashTable:
-    def __init__(self, number_of_spots):
+    def __init__(self):
+        # We are setitng the default size of the map to a numerical value
+        self.size = 6
 
-        # Initalizing the number of spots in the table going to be used in multiple functions
-        self.number_of_spots = number_of_spots
+        # The hash map or the hash table is the an array with null values which is
+        # the same as the size we pass in
+        self.map = [None] * self.size
 
-    def create_hash_table(self):
+    def get_index(self, key):
+        # We are setting the counter for the hash
+        hash = 0
 
-        # Creating the table or the list with the number of spots the user passes in
-        table = [None] * self.number_of_spots
-        return table
-
-    def generate_index_from_hash_code(self, hash_number):
-        # Generates an index from the given hash number does not account for collisions
-        index = hash_number % self.number_of_spots
+        # For each character in the key increment the hash by its ascii value
+        # representation and then return the remainder of that value when divided
+        # by the size of the array
+        for char in key:
+            hash += ord(char)
+        index = hash % self.size
         return index
 
-
-    def insert_value(self, key, value):
-        hash_table = self.create_hash_table()
-        hash_table[self.generate_index_from_hash_code(key)] = value
-        return hash_table
-
-
-hash_instance = HashTable(10)
-print(hash_instance.create_hash_table())
-print(hash_instance.insert_value(115121212112111, "dog"))
+    def add(self, key, value):
+        # Gets the index of the key that the user passes in
+        key_hash = self.get_index(key)
