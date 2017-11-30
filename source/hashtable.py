@@ -57,6 +57,7 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Count number of key-value entries in each bucket
+        # So if we
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
@@ -73,10 +74,13 @@ class HashTable(object):
             return
 
         for pair in self.buckets[bucket_index]:
+            # When iterating through all possible pairs in the desired bucket we check if the key the user passes in matches
+            # the key in any of the pairs in the bucket
             if key == pair[0]:
                 return True
-            else:
-                return False
+            # If not return False meaning the user passed in a non existent key
+            return False
+
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
