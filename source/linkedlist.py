@@ -176,55 +176,82 @@ class LinkedList(object):
         # Setting the pointer of the head to point to the first node
         current_node = self.head
 
-        # Until the data of the node matches the name of the item we do not stop iterating
-        while current_node is not None:
-
-
-            # We start iterating through by setting the previous node to the current node everytime we iterate through the loop
-            previous_node = current_node
-
-            # We start iterating through and we set that current node to the next node and then we have now a current node next node as well as previous node
-            current_node = current_node.next
-
-            if self.length() == 1:
+        if self.length() == 1:
             #
             #     # We have to tell the head and the tail not to point anything because what they are pointing to is about to be deleted
-                self.head = None
-                self.tail = None
-                return
-            # When the name of the item the user passes in matches the data of the node we are looking for
-            if current_node.data == item:
+            self.head = None
+            self.tail = None
+            return
 
-                # We then set the pointer of the previous node to the node after the current node
-                previous_node.next = current_node.next
+        # Until the data of the node matches the name of the item we do not stop iterating
+        while current_node.data != item:
 
-                # If the length of the list is only one we have to go about deleting the node in a different way
-                #
+            # This gives us three positions the previous node the current node and the next node
+            previous_node = current_node
+            current_node = current_node.next
 
-                if item == self.tail.data:
+        # Since we have the node the user is trying to delete we then have to verify if the node that is trying to be deleted is the head
+        if current_node == self.head:
+            # Update the head to the next node therefore bumping out the current node or deleting it
+            self.head = current_node.next
+            return
 
-                    # If the user is trying to delete the last node of the list essentially where the tail is pointing we
-                    # set the previous node next node to none so it knows we are pointing to None
+        # If the node that the user is trying to delete is the tail
+        if current_node == self.tail:
+            # We update the tail to be pointing to previous node
+            self.tail = previous_node
 
-                    previous_node.next = None
-                    self.tail = previous_node
+            # We then set the previous nodes pointer equal to None
+            previous_node.next = None
+            return
 
-
-                    return
-                    # We then set the tail to the previous node
-
-                if item == self.head.data:
-
-                    # If the user trys to delete the first node we set the pointer of the head to that nodes next node
-                    current_node.next = self.head
-
-                    # We then set the current node to None to basically say it doesnt exist
-                    current_node = None
-                return
+        previous_node.next = current_node.next
 
 
-        raise ValueError('Item not found: {}'.format(item))
 
+
+
+
+        #
+        #     # We start iterating through by setting the previous node to the current node everytime we iterate through the loop
+        #     previous_node = current_node
+        #
+        #     # We start iterating through and we set that current node to the next node and then we have now a current node next node as well as previous node
+        #     current_node = current_node.next
+        #
+        #     # When the name of the item the user passes in matches the data of the node we are looking for
+        #     if current_node.data == item:
+        #
+        #         # We then set the pointer of the previous node to the node after the current node
+        #         previous_node.next = current_node.next
+        #
+        #         # If the length of the list is only one we have to go about deleting the node in a different way
+        #         #
+        #
+        #         if item == self.tail.data:
+        #
+        #             # If the user is trying to delete the last node of the list essentially where the tail is pointing we
+        #             # set the previous node next node to none so it knows we are pointing to None
+        #
+        #             previous_node.next = None
+        #             self.tail = previous_node
+        #
+        #
+        #             return
+        #             # We then set the tail to the previous node
+        #
+        #         if item == self.head.data:
+        #
+        #             # If the user trys to delete the first node we set the pointer of the head to that nodes next node
+        #             current_node.next = self.head
+        #
+        #             # We then set the current node to None to basically say it doesnt exist
+        #             current_node = None
+        #         return
+        #
+        #
+        # raise ValueError('Item not found: {}'.format(item))
+        #
 
 
 def test_linked_list():

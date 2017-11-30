@@ -62,7 +62,7 @@ class HashTable(object):
         bucket_count = 0
         for bucket in self.buckets:
             # Now that we have each bucket we now have to figure out a way to get each pair in the bucket
-
+            pass
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
         TODO: Running time: O(???) Why and under what conditions?"""
@@ -98,18 +98,26 @@ class HashTable(object):
        # To even get the key that the user passes in we first have to find the bucket it is in
         bucket_index = self._bucket_index(key)
 
-        # Now that we have the location of the bucket we have to first check if there are even any values in the bucket
-        if self.buckets[bucket_index] is None:
-            raise KeyError('Key not found: {}'.format(key))
-        else:
-            # If we come into this else block we know that the bucket does contain values we do not know how many though therefore
-            # we have to start iterating through and see when the key in the pair matches the key the user has passed in
-            for pair in self.buckets[bucket_index]:
-                if pair[0] == key:
-                    # Since we know that the pairs are a list constructed of key value pairs we know that the second element is the
-                    # value for the key
-                    return pair[1]
+        found_bucket = self.buckets[bucket_index]
+        # # Now that we have the location of the bucket we have to first check if there are even any values in the bucket
+        # if self.buckets[bucket_index].is_empty:
+        #     raise KeyError('Key not found: {}'.format(key))
+        # else:
+        #     # If we come into this else block we know that the bucket does contain values we do not know how many though therefore
+        #     # we have to start iterating through and see when the key in the pair matches the key the user has passed in
+        #     for pair in self.buckets[bucket_index].items():
+        #         if pair[0] == key:
+        #             # Since we know that the pairs are a list constructed of key value pairs we know that the second element is the
+        #             # value for the key
+        #             return pair[1]
 
+
+        entry = found_bucket.find(lambda linked_item: linked_item[0] == key)
+        if entry:
+            # print('this is get entry', entry)
+            return entry
+        else:
+            raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
@@ -128,26 +136,31 @@ class HashTable(object):
         # We should hold the desired bucket somewhere just so we can call it
 
 
-        # Now that we have the index of the bucket we have to see if there are any values if theres none then we can just set the data if there is we are going to have to append a node
-        if self.buckets[bucket_index] is None:
-            self.buckets[bucket_index] = key_value
-            return True
-        # Now that we have established that the bucket does actually have values we then face the problem where we actually
-        # do not know how many values are in the bucket therefore we have to iterate
-        else:
-            for pair in self.buckets[bucket_index]:
-                # The reason we can do this is due to the reason that we know that the first element at 0 is always going to be the key
-                if pair[0] == key:
-                    # If the user tries to add to a key that already exists then we simply update the value
-                    # Why do we have to update the value that is just overwriting it does this purposefully avoid collisions?
-                    # Why overwrite it shouldnt we add another pair
-                    pair[1] = value
-                    return True
-            # However if the user passes in a key that doesnt exist in the bucket we simply make another pair for it
-            self.buckets[bucket_index].append(key_value)
+        # # Now that we have the index of the bucket we have to see if there are any values if theres none then we can just set the data if there is we are going to have to append a node
+        # if self.buckets[bucket_index] is None:
+        #     self.buckets[bucket_index] = key_value
+        #     return True
+        # # Now that we have established that the bucket does actually have values we then face the problem where we actually
+        # # do not know how many values are in the bucket therefore we have to iterate
+        # else:
+        #     for pair in self.buckets[bucket_index]:
+        #         # The reason we can do this is due to the reason that we know that the first element at 0 is always going to be the key
+        #         if pair[0] == key:
+        #             # If the user tries to add to a key that already exists then we simply update the value
+        #             # Why do we have to update the value that is just overwriting it does this purposefully avoid collisions?
+        #             # Why overwrite it shouldnt we add another pair
+        #             pair[1] = value
+        #             return True
+        #     # However if the user passes in a key that doesnt exist in the bucket we simply make another pair for it
+        #     self.buckets[bucket_index].append(key_value)
 
+        # Holding the bucket in the variable
+        found_bucket = self.buckets[bucket_index]
 
-
+        entry = found_bucket.find(lambda linked_item: linked_item[0] == key)
+        if entry:
+            found_bucket.delete(entry)
+        found_bucket.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -161,17 +174,17 @@ class HashTable(object):
         # If the user wants to delete a pair in the bucket we first have to get the location of the bucket where the key is
         bucket_index = self._bucket_index(key)
 
-        # Now that we have the location of the bucket we first have to check if the bucket is empty
-        if self.buckets[bucket_index] is None:
-            raise KeyError('Key not found: {}'.format(key))
+        bucket = self.buckets[bucket_index]
+
+        # Using the find method in the linked list
+        found = bucket.find(lambda item: item[0] == key)  # Linear time
+        # If found is not empty
+        if found is not None:
+            # Then delete item from bucket
+            bucket.delete(found)
+            return
         else:
-            # Now that we have established that the bucket does actually have pairs we do not actually know how many pairs
-            # there are so we have to loop through all the pairs in that desired bucket
-            for pair in self.buckets[bucket_index]:
-                if pair[0] == key:
-                    # When we reach the point where the key the user passes in matches the key in the pairs we are iterating over
-                    # then we want to delete the pair from the bucket
-                    del pair
+            raise KeyError("Key not longer exists in this hash table")
 
 
 def test_hash_table():
@@ -205,6 +218,6 @@ def test_hash_table():
         print('length: {}'.format(ht.length()))
 
 
-# if __name__ == '__main__':
-    # test_hash_table()
+if __name__ == '__main__':
+    test_hash_table()
 
