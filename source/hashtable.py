@@ -57,7 +57,11 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Count number of key-value entries in each bucket
-        # So if we
+        # So if we arte trying to find the number of how many buckets there are we essentially need all the buckets so we
+        # have to iterate through the hash map but the kick is not the number of buckets the sum of all the pairs in all the buckets
+        bucket_count = 0
+        for bucket in self.buckets:
+            # Now that we have each bucket we now have to figure out a way to get each pair in the bucket
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
@@ -153,6 +157,21 @@ class HashTable(object):
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
+
+        # If the user wants to delete a pair in the bucket we first have to get the location of the bucket where the key is
+        bucket_index = self._bucket_index(key)
+
+        # Now that we have the location of the bucket we first have to check if the bucket is empty
+        if self.buckets[bucket_index] is None:
+            raise KeyError('Key not found: {}'.format(key))
+        else:
+            # Now that we have established that the bucket does actually have pairs we do not actually know how many pairs
+            # there are so we have to loop through all the pairs in that desired bucket
+            for pair in self.buckets[bucket_index]:
+                if pair[0] == key:
+                    # When we reach the point where the key the user passes in matches the key in the pairs we are iterating over
+                    # then we want to delete the pair from the bucket
+                    del pair
 
 
 def test_hash_table():
