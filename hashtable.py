@@ -69,3 +69,19 @@ class HashTable:
                     # Return the value for the key that we confirmed is the key that the user passed in
                     return pair[1]
         return None
+
+    def delete(self, key):
+        # First we have to get the bucket the user is looking for
+        bucket_of_key = self.get_index(key)
+
+        # Now that we have the bucket we are presented with the lists which we do not how many there are of therefore we have
+        # to start iterating through but first we have to see if the bucket even contains any of the values
+        if self.map[bucket_of_key] is None:
+            return 'This bucket does not contain any values therefore no deletion'
+        # I dont need to loop through something I can find out if I have the exact position
+
+        # Now we get the specific list of the bucket
+        for pair in range(0, len(self.map[bucket_of_key])):
+            if self.map[bucket_of_key][pair][0] == key:
+                self.map[bucket_of_key].remove(pair)
+                return True
