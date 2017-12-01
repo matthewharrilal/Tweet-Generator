@@ -152,20 +152,17 @@ class HashTable(object):
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
 
-        # If the user wants to delete a pair in the bucket we first have to get the location of the bucket where the key is
+       # If the user wants to delete a key we first have to find the bucket that this key is located in
         bucket_index = self._bucket_index(key)
 
+        # Now that we have the index of the bucket we now have to get the bucket at that index
         bucket = self.buckets[bucket_index]
 
-        # Using the find method in the linked list
-        found = bucket.find(lambda item: item[0] == key)  # Linear time
-        # If found is not empty
-        if found is not None:
-            # Then delete item from bucket
-            bucket.delete(found)
-            return
-        else:
-            raise KeyError("Key not longer exists in this hash table")
+        # Now that we have the bucket we first have to see if there are any values even inside the bucket
+        if bucket is None:
+            return None
+
+        # Now that we have established that the bucket does actually
 
 
 def test_hash_table():
@@ -199,8 +196,5 @@ def test_hash_table():
         print('length: {}'.format(ht.length()))
 
 
-# if __name__ == '__main__':
-#     test_hash_table()
-
-hash = HashTable()
-print(hash.get('matthew'))
+if __name__ == '__main__':
+    test_hash_table()
