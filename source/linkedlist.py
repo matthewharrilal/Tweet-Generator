@@ -1,4 +1,5 @@
 #!python
+import pdb
 
 class Node(object):
 
@@ -154,10 +155,13 @@ class LinkedList(object):
         # TODO: Check if node's data satisfies given quality function
         current_node = self.head
 
-
-
+        # Until we get to the node that that matches the quality of the node the user is looking for this while loop will keep
+        # going
         while current_node.data != quality:
+
+            # Keeps the while loop going by changing the current node to the next node
             current_node = current_node.next
+            # If the user passes in a node they are searching for that doesnt exist we return none
             if current_node is None:
                 # raise ValueError('Item not found: {}'.format(quality))
                 return None
@@ -223,52 +227,6 @@ class LinkedList(object):
         previous_node.next = current_node.next
 
 
-
-
-
-
-        #
-        #     # We start iterating through by setting the previous node to the current node everytime we iterate through the loop
-        #     previous_node = current_node
-        #
-        #     # We start iterating through and we set that current node to the next node and then we have now a current node next node as well as previous node
-        #     current_node = current_node.next
-        #
-        #     # When the name of the item the user passes in matches the data of the node we are looking for
-        #     if current_node.data == item:
-        #
-        #         # We then set the pointer of the previous node to the node after the current node
-        #         previous_node.next = current_node.next
-        #
-        #         # If the length of the list is only one we have to go about deleting the node in a different way
-        #         #
-        #
-        #         if item == self.tail.data:
-        #
-        #             # If the user is trying to delete the last node of the list essentially where the tail is pointing we
-        #             # set the previous node next node to none so it knows we are pointing to None
-        #
-        #             previous_node.next = None
-        #             self.tail = previous_node
-        #
-        #
-        #             return
-        #             # We then set the tail to the previous node
-        #
-        #         if item == self.head.data:
-        #
-        #             # If the user trys to delete the first node we set the pointer of the head to that nodes next node
-        #             current_node.next = self.head
-        #
-        #             # We then set the current node to None to basically say it doesnt exist
-        #             current_node = None
-        #         return
-        #
-        #
-        # raise ValueError('Item not found: {}'.format(item))
-        #
-
-
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
@@ -297,8 +255,6 @@ def test_linked_list():
         print('length: {}'.format(ll.length()))
 
 
-linked = LinkedList()
+linked_list = LinkedList()
+linked_list.append(("Matthew", "Harrilal"))
 
-linked.append("Matthew")
-linked.append("Steven")
-print(linked.length())
