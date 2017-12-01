@@ -111,7 +111,7 @@ class HashTable(object):
         if key_matching is None:
             raise KeyError('Key not found: {}'.format(key_matching))
         # Now that we have filtered for if the key matching results are done what we can now do from here is we can now return the value from that tuple
-        return key_matching[1]
+        return key_matching
 
 
     def set(self, key, value):
@@ -127,6 +127,21 @@ class HashTable(object):
 
         #Then we have to get the value at that bucket_index or essentially the bucket
         bucket = self.buckets[bucket_index]
+
+        # Now that we have the bucket we first have to see if the bucket is none to save us some time
+        if bucket is None:
+            return None
+
+        # Now that we have checked for values that are even present inside this bucket we now have to check if the key the user is passing in
+        # exists inside the bucket
+
+        # And to do that we can use the key matching high order function we implemented in the get function which we can cell
+        if self.get(key) is None:
+            bucket.append((key, value))
+        else:
+            bucket.delete(self.get(key))
+            bucket.append((key,value))
+
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
