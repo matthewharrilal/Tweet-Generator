@@ -1,4 +1,5 @@
 #!python
+import pdb
 
 from linkedlist import LinkedList
 
@@ -8,6 +9,7 @@ class HashTable(object):
         """Initialize this hash table with the given initial size."""
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
+        self.size = 0
 
     def __str__(self):
         """Return a formatted string representation of this hash table."""
@@ -17,6 +19,7 @@ class HashTable(object):
     def __repr__(self):
         """Return a string representation of this hash table."""
         return 'HashTable({!r})'.format(self.items())
+
 
     def _bucket_index(self, key):
         """Return the bucket index where the given key would be stored."""
@@ -38,10 +41,20 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Collect all values in each bucket
+        all_values = []
+        #
+        # for bucket in self.buckets:
+        #    values_in_bucket = bucket.find(lambda value: value[1])
+        #    print('These are the values in the bucket %s' %(values_in_bucket))
+        #    all_values.append(values_in_bucket)
+        # return all_values
+
         for bucket in self.buckets:
-            if bucket is not None:
-                for node in bucket:
-                    print(node[1])
+            for key,value in bucket.items():
+                print('These are the values %s' %(value))
+                all_values.append(value)
+        return all_values
+
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
@@ -57,12 +70,12 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Count number of key-value entries in each bucket
-        # So if we arte trying to find the number of how many buckets there are we essentially need all the buckets so we
-        # have to iterate through the hash map but the kick is not the number of buckets the sum of all the pairs in all the buckets
-        bucket_count = 0
-        for bucket in self.buckets:
-            # Now that we have each bucket we now have to figure out a way to get each pair in the bucket
-            pass
+
+        # All we need to do is return the length of self.items due to us already traversing the buckets in the items function
+        # return len(self.items())
+        return self.size
+
+
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
         TODO: Running time: O(???) Why and under what conditions?"""
@@ -70,20 +83,16 @@ class HashTable(object):
         # TODO: Check if key-value entry exists in bucket
 
         # So to even see if the bucket contains the key the user is looking for we have to get the location of the bucket
-        bucket_index = self._bucket_index(key)
+        index = self._bucket_index(key)
 
-        # Now that we have the location of the bucket we now have to see if the bucket even contains any values before we start searching
-        if self.buckets[bucket_index] is None:
-            print('There were no values in this bucket to begin with')
-            return
+        # Getting that bucket at that index
+        bucket = self.buckets[index]
 
-        for pair in self.buckets[bucket_index]:
-            # When iterating through all possible pairs in the desired bucket we check if the key the user passes in matches
-            # the key in any of the pairs in the bucket
-            if key == pair[0]:
-                return True
-            # If not return False meaning the user passed in a non existent key
-            return False
+        # Using lambda to find and iterate through the keys to see if any match the key that the user provided
+        key_match = bucket.find(lambda key_value: key_value[0] == key)
+
+        # Return the boolean value depending on the value from the key match
+        return key_match is not None
 
 
     def get(self, key):
@@ -101,18 +110,26 @@ class HashTable(object):
         # We then have to get the actual bucket
         bucket = self.buckets[bucket_index]
 
+
         # Now that we have the bucket as well as knowing that in a hash table that we are going to be storing key value pairs we then have
         # to store the values in a tuple therefore what we can do is that we can use a higher order function to get the first value and then from
         # there what we can do is that we can use that to iterate as well as compare the key that the user passes in to the current key we are on
-        key_matching = bucket.find(lambda key_value: key_value[0] == key)
+        # key_matching = bucket.find(lambda key_value: key_value[0] == key)
+        #
+        # # When the key matching is done sorting through all the values in addition to us having edge cases in the linked list file for the find function
+        # # we can then use simple error handling to see if the data we get back for the key_matching is none and if it is raise the value error
+        # if key_matching is not None:
+        #     return key_matching[1]
+        # # Now that we have filtered for if the key matching results are done what we can now do from here is we can now return the value from that tuple
+        # raise KeyError('Key not found: {}'.format(key))
 
-        # When the key matching is done sorting through all the values in addition to us having edge cases in the linked list file for the find function
-        # we can then use simple error handling to see if the data we get back for the key_matching is none and if it is raise the value error
-        if key_matching is None:
-            raise KeyError('Key not found: {}'.format(key_matching))
-        # Now that we have filtered for if the key matching results are done what we can now do from here is we can now return the value from that tuple
-        return key_matching
-
+        # Iterate through the key value pairs in the specific bucket that we have found
+        for iter_key, iter_value in bucket.items():
+            # If the keys we are iterating through over matches the key that the user passes in then return that value back to me
+            if iter_key == key:
+                return iter_value
+        # If not raise the key error
+        raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
@@ -122,25 +139,25 @@ class HashTable(object):
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
 
-        # If we are going to be updating values then we first have to find the bucket that we are trying to set the key at
+        # Finding the index of the bucket at the given key
         bucket_index = self._bucket_index(key)
 
-        #Then we have to get the value at that bucket_index or essentially the bucket
+        # Find the bucket at the index
         bucket = self.buckets[bucket_index]
 
-        # Now that we have the bucket we first have to see if the bucket is none to save us some time
-        if bucket is None:
-            return None
+        # Check if the key is contained in the bucket we have found using the key
+        if self.contains(key):
 
-        # Now that we have checked for values that are even present inside this bucket we now have to check if the key the user is passing in
-        # exists inside the bucket
+            # If so we find the old value using the get function which returns us a value at the given key
+            old_value = self.get(key)
 
-        # And to do that we can use the key matching high order function we implemented in the get function which we can cell
-        if self.get(key) is None:
+            # Then we delete the key and old value pair in that bucket
+            bucket.delete((key,old_value))
+
             bucket.append((key, value))
         else:
-            bucket.delete(self.get(key))
             bucket.append((key,value))
+            self.size += 1
 
 
     def delete(self, key):
@@ -151,18 +168,22 @@ class HashTable(object):
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
-
-       # If the user wants to delete a key we first have to find the bucket that this key is located in
         bucket_index = self._bucket_index(key)
 
-        # Now that we have the index of the bucket we now have to get the bucket at that index
         bucket = self.buckets[bucket_index]
 
-        # Now that we have the bucket we first have to see if there are any values even inside the bucket
-        if bucket is None:
-            return None
+        if bucket.is_empty():
+            # Checking if the bucket is empty and if so raising the key value error
+            raise KeyError('Key not found: {}'.format(key))
+        else:
+            # Since the get function gets the value at a given key we get the corresponding value to the given key by the user
+            value = self.get(key)
+            # Then delete that key value pair
+            bucket.delete((key,value))
+            self.size -= 1
 
-        # Now that we have established that the bucket does actually
+
+
 
 
 def test_hash_table():

@@ -151,21 +151,30 @@ class LinkedList(object):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
+
+        # Worst case running time is if the you have to go through the linked list or if not found O(n)
+        # Best case o(1) if at or near the head same as the tail
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
         current_node = self.head
 
         # Until we get to the node that that matches the quality of the node the user is looking for this while loop will keep
         # going
-        while current_node.data != quality:
-
-            # Keeps the while loop going by changing the current node to the next node
+        while current_node is not None:
+            if current_node.data == quality:
+                return current_node.data
             current_node = current_node.next
-            # If the user passes in a node they are searching for that doesnt exist we return none
-            if current_node is None:
-                # raise ValueError('Item not found: {}'.format(quality))
-                return None
-        return current_node.data
+        return None
+
+        # if self.is_empty():
+        #     return None
+        # while current_node.data != quality:
+        #     current_node = current_node.next
+        #     if current_node is None:
+        #         # raise ValueError('Item not found: {}'.format(quality))
+        #         return None
+        # return current_node.data
+
 
 
 
@@ -225,6 +234,40 @@ class LinkedList(object):
             return
 
         previous_node.next = current_node.next
+
+    def replace(self, find, replace_with):
+        node = self.head
+        new_node = Node(replace_with)
+        while node is not None:
+            next_node = node.next
+            # if first node is item to replace
+            if node.data == find:
+                # if current node is being replaced and only node in list
+                if node == self.head and node == self.tail:
+                    self.head = new_node
+                    self.tail = self.head
+                    del node
+                    return
+                new_node.next = next_node
+                self.head = new_node
+                del node
+                return
+            # if current node is not last and next node is item to be replaced
+            if next_node is not None and next_node.data == find:
+                # if next node is also tail
+                if next_node == self.tail:
+                    node.next = new_node
+                    self.tail = node.next
+                    del next_node
+                    return
+                node.next = new_node
+                new_node.next = next_node.next
+                del next_node
+                return
+            else:
+                node = node.next
+
+        raise ValueError('Item not found: {}'.format(find))
 
 
 def test_linked_list():
