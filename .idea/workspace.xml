@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9860f144-91ce-4744-bdc2-ea26697b12c5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/hashtable.py" afterPath="$PROJECT_DIR$/source/hashtable.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/linkedlist.py" afterPath="$PROJECT_DIR$/source/linkedlist.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ClassDictogram.py" afterPath="$PROJECT_DIR$/ClassDictogram.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +16,31 @@
       <file leaf-file-name="ClassDictogram.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ClassDictogram.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-167">
-              <caret line="119" column="23" lean-forward="false" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="23" />
+            <state relative-caret-position="540">
+              <caret line="172" column="17" lean-forward="false" selection-start-line="172" selection-start-column="17" selection-end-line="172" selection-end-column="17" />
               <folding>
                 <element signature="e#1#15#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="words.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/words.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="37385">
+              <caret line="5000" column="0" lean-forward="false" selection-start-line="5000" selection-start-column="0" selection-end-line="5000" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="robert_greene.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/robert_greene.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289035">
+              <caret line="19269" column="0" lean-forward="false" selection-start-line="19269" selection-start-column="0" selection-end-line="19269" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -37,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hashtable.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hashtable.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/hashtable.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1557">
@@ -138,7 +156,6 @@
         <option value="$PROJECT_DIR$/histogram_exercises.py" />
         <option value="$PROJECT_DIR$/ClassListogram.py" />
         <option value="$PROJECT_DIR$/cleanup.py" />
-        <option value="$PROJECT_DIR$/ClassDictogram.py" />
         <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/test_linked_list.py" />
         <option value="$PROJECT_DIR$/linkedlist.py" />
@@ -147,6 +164,7 @@
         <option value="$PROJECT_DIR$/source/example_extend" />
         <option value="$PROJECT_DIR$/source/linkedlist.py" />
         <option value="$PROJECT_DIR$/source/hashtable.py" />
+        <option value="$PROJECT_DIR$/ClassDictogram.py" />
       </list>
     </option>
   </component>
@@ -381,9 +399,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2870929" sideWeight="0.5486409" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32810616" sideWeight="0.50572246" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20024125" sideWeight="0.59227467" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24487334" sideWeight="0.5944206" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24487334" sideWeight="0.40772533" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24487334" sideWeight="0.4055794" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39927623" sideWeight="0.4048641" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -601,13 +619,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dictionary+words.py" />
-    <entry file="file://$PROJECT_DIR$/words.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75000">
-          <caret line="5000" column="0" lean-forward="false" selection-start-line="5000" selection-start-column="0" selection-end-line="5000" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/creating_randomness.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -619,13 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/robert_greene.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289035">
-          <caret line="19269" column="0" lean-forward="false" selection-start-line="19269" selection-start-column="0" selection-end-line="19269" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -720,16 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ClassDictogram.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-167">
-          <caret line="119" column="23" lean-forward="false" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="23" />
-          <folding>
-            <element signature="e#1#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/hashtable_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="583">
@@ -753,6 +747,32 @@
           <folding>
             <element signature="e#9#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClassDictogram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="172" column="17" lean-forward="false" selection-start-line="172" selection-start-column="17" selection-end-line="172" selection-end-column="17" />
+          <folding>
+            <element signature="e#1#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/words.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37385">
+          <caret line="5000" column="0" lean-forward="false" selection-start-line="5000" selection-start-column="0" selection-end-line="5000" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/robert_greene.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289035">
+          <caret line="19269" column="0" lean-forward="false" selection-start-line="19269" selection-start-column="0" selection-end-line="19269" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
