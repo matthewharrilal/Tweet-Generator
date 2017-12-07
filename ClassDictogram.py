@@ -158,19 +158,19 @@ def markov_chain(cleaned_text):
 #
 
 def second_order_markov_chain(cleaned_text):
-    x = 0
+    count = 0
     second_order_markov_dictionary = {}
 
-    while x < len(cleaned_text) - 2:
-        current_word = cleaned_text[x]
-        next_word = cleaned_text[x + 1]
-        next_next_word = cleaned_text[x + 2]
+    while count < len(cleaned_text) - 2:
+        current_word = cleaned_text[count]
+        next_word = cleaned_text[count + 1]
+        next_next_word = cleaned_text[count + 2]
         current_and_next_list = [current_word, next_word]
         current_and_next_pair = ' '.join(current_and_next_list)
         if current_and_next_pair not in second_order_markov_dictionary.keys():
             second_order_markov_dictionary[current_and_next_pair] = Dictogram()
         second_order_markov_dictionary[current_and_next_pair].add_count(next_next_word)
-        x = x + 1
+        count = count + 1
     return second_order_markov_dictionary
 
 print(second_order_markov_chain(cleaned_text))
