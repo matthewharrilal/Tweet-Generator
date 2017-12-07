@@ -173,10 +173,15 @@ def second_order_markov_chain(cleaned_text):
 
         #Formatting that list into a string
         current_and_next_pair = ' '.join(current_and_next_list)
+        # Checking if the string is in the keys
         if current_and_next_pair not in second_order_markov_dictionary.keys():
+            # If not make it a key as well as set it equal to an empty instance Dictogram
             second_order_markov_dictionary[current_and_next_pair] = Dictogram()
+        # Then populate that dictogram instance with the dictioray of count which is a key value pair comprised of a word and it's frequency
         second_order_markov_dictionary[current_and_next_pair].add_count(next_next_word)
+        # Increment the count by 1 to keep the while loop iterating
         count = count + 1
+    # Then return the dictionary
     return second_order_markov_dictionary
 
 dictogram = Dictogram(cleaned_text)
