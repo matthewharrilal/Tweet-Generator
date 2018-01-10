@@ -184,19 +184,4 @@ def second_order_markov_chain(cleaned_text):
     # Then return the dictionary
     return second_order_markov_dictionary
 
-dictogram = Dictogram(cleaned_text)
-
-
-
-def generate_sentence_from_chain(length_of_sentence):
-    sentence_list = []
-    random_word = dictogram.generate_random_word()
-    for _ in range(0, length_of_sentence - 1):
-        histogram = markov_chain(cleaned_text)[random_word]
-        random_word_from_histogram = histogram.generate_random_word()
-        random_word = random_word_from_histogram
-        sentence_list.append(random_word)
-    print(histogram)
-    return sentence_list
-
-print(generate_sentence_from_chain(12))
+print(second_order_markov_chain(cleaned_text))
