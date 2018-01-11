@@ -109,49 +109,24 @@ def decode_from_any_base(digit, base):
 
     len_of_digit_list = len(any_base_digit_list)
 
+
     for index, base_digit in enumerate(any_base_digit_list):
         power_position = len_of_digit_list - index
-        if type(base_digit) == str and base > transform_letter_into_integer(base_digit):
-            cumalitive_count += (base ** (power_position - 1) * transform_letter_into_integer(base_digit))
+        digit_value = transform_letter_into_integer(base_digit)
+        if digit_value < base:
+            exponent = power_position - 1
+            cumalitive_count += (base ** exponent * digit_value)
         else:
-            return 'base is out of range: {}'.format(base)
+            raise ValueError('base is out of range: {}'.format(base))
 
     return cumalitive_count
 
-# print(decode_hexadecimals('deadbeef'))
-
-
-
-# def encode_from_base_ten_to_any_base(digits, base):
-#     remainder_list = []
-#     remainder = digits % base
-#
-#     print("This is the original dividend: %s, and the orignal remainder: %s" %(digits, remainder))
-#
-#     while digits > base:
-#
-#         digits //= base
-#
-#         remainders = digits % base
-#
-#         # Can not do this due to the reason that if we use this conditional then we are left with the problem that the quotient is left out
-#         # if digits != remainders:
-#
-#         print("When the dividend is: %s, this is the remainder %s" %(digits ,remainders))
-#
-#         # We need the last quotient as well as all remainders from descending to ascending order with the exception of the last remainder
-#
-#         #
-#         remainder_list.append(remainders)
-#         reversed_remainder_list = remainder_list[::-1]
-#         reversed_remainder_list.remove(reversed_remainder_list[0])
-#         reversed_remainder_list.append(remainder)
-#     prepended_reversed_remainder_list = [digits] + reversed_remainder_list
-#         # [1, 1, 2, 0, 0, 0] This was before the reversal
-#     return prepended_reversed_remainder_list
-
-def transform_letter(letter):
+def transform_letter():
     hex_dict = {10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E',  15: 'F'}
+    # hex_dict = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'A': 10, 'B': 11,
+    #             'C': 12, 'D': 13, 'E': 14, 'F': 15, 'G': 16, 'H': 17, 'I': 18, 'J': 19, 'K': 20, 'L': 21, 'M': 22,
+    #             'N': 23, 'O': 24, 'P': 25, 'Q': 26, 'R': 27, 'S': 28, 'T': 29, 'U': 30, 'V': 31, 'W': 32, 'X': 33,
+    #             'Y': 34, 'Z': 35}
     return hex_dict
 
 
@@ -159,10 +134,12 @@ def encode_from_base_ten_to_any_base(digits, base):
     remainder_list = []
     remainder = digits % base
 
-    hex_dict = {'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
-
-    if digits < base:
+    if digits < base and base <= 10 :
         return "Any digit lower than base is the digit itself:  %s" %(digits)
+
+    if digits in transform_letter():
+        #todo Giving me problems when given the problem to encode 10 to base 10
+        return transform_letter()[digits]
 
     while digits >= base:
 
@@ -176,32 +153,34 @@ def encode_from_base_ten_to_any_base(digits, base):
     # return ''.join(str(x) for x in prepended_reversed_remainder_list)
     return prepended_reversed_remainder_list
 
-print(encode_from_base_ten_to_any_base(12648430, 16))
 
 def encode_base_ten_to_hexadecimal(list_of_digits):
     newer_list = []
     for index,digit in enumerate(list_of_digits):
-        if digit in transform_letter(digit).keys():
-            hexadecimal_list = list_of_digits[index] = transform_letter(digit)[digit]
-            newer_list.append(hexadecimal_list)
-    pretty_printed_result = ''.join(str(x) for x in newer_list)
+        if digit in transform_letter().keys():
+            list_of_digits[index] = transform_letter()[digit]
+    pretty_printed_result = ''.join(str(number) for number in list_of_digits)
     return pretty_printed_result.lower()
 
-print(encode_base_ten_to_hexadecimal(encode_from_base_ten_to_any_base(12648430, 16)))
+#
+# # print(encode_base_ten_to_hexadecimal(encode_from_base_ten_to_any_base(4027038225, 16)))
+# print(transform_letter(10))
+print(encode_base_ten_to_hexadecimal(encode_from_base_ten_to_any_base(1,2)))
 
-
-
-
-
-
-
-# Have to fix binary if you are going to format this way have to have some error handline to make sure last dividend doesnt exceed the base capabilities if the divedend is not equal to the base
-
-# for _ in range(3):
-#     print(divmod(8, 745))
 
 def find_remainder(digits, base):
     return digits % base
-print(encode_from_base_ten_to_any_base(2766, 16))
 
-# TESTS THAT DO NOT WORK assert encode(1234, 4) == '103102', assert encode(1234, 8) == '2322' print(encode_from_base_ten_to_any_base(5634, 4))
+
+# TESTS THAT DO NOT WORK assert encode(1234, 32) == '16i',assert encode(10, 2) == '1010',assert encode(10, 10) == '10', assert encode(248975, 16) == '3cc8f'
+#         assert encode(248975, 25) == 'fn90'
+#         assert encode(248975, 32) == '7j4f'
+#         assert encode(248975, 36) == '5c3z'
+# assert encode(1234, 32) == '16i'
+# assert encode(10, 10) == '10'
+# assert encode(10, 2) == '1010'    MOST OF THESE TO FIX YOU JUST HAVE TO FIX THE CONDITION CHECKING IF THE DIGIT IS IN THE DICTIONARY
+#         assert encode(11, 2) == '1011'
+#         assert encode(12, 2) == '1100'
+#         assert encode(13, 2) == '1101'
+#         assert encode(14, 2) == '1110'
+#         assert encode(15, 2) == '1111'
